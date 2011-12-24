@@ -6,6 +6,9 @@ namespace VerifyArgs
 {
 	#region NotNull()
 
+	/// <summary>
+	/// <see cref="NotNull{T}" /> method plugin.
+	/// </summary>
 	public static class NotNullPlugin
 	{
 		private static class Check<T> where T : class
@@ -16,6 +19,12 @@ namespace VerifyArgs
 				(n, _) => new ArgumentNullException(n));
 		}
 
+		/// <summary>
+		/// Checks that arguments are not null.
+		/// </summary>
+		/// <typeparam name="T">Anonymous object type.</typeparam>
+		/// <param name="args">Arguments holder.</param>
+		/// <returns>Arguments holder used for subsequent checks.</returns>
 		static public IArguments<T> NotNull<T>(this IArguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
@@ -27,6 +36,9 @@ namespace VerifyArgs
 
 	#region NotEmpty()
 
+	/// <summary>
+	/// <see cref="NotEmpty{T}" /> method plugin.
+	/// </summary>
 	static public class NotEmptyPlugin
 	{
 		private static class Check<T> where T : class
@@ -37,6 +49,12 @@ namespace VerifyArgs
 				(n, _) => new ArgumentException("Value can't be empty.", n));
 		}
 
+		/// <summary>
+		/// Checks that arguments are not empty strings/collections.
+		/// </summary>
+		/// <typeparam name="T">Anonymous object type.</typeparam>
+		/// <param name="args">Arguments holder.</param>
+		/// <returns>Arguments holder used for subsequent checks.</returns>
 		static public IArguments<T> NotEmpty<T>(this IArguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
@@ -48,8 +66,17 @@ namespace VerifyArgs
 
 	#region NotNullOrEmpty()
 
+	/// <summary>
+	/// <see cref="NotNullOrEmpty{T}" /> method plugin.
+	/// </summary>
 	static public class NotNullOrEmptyPlugin
 	{
+		/// <summary>
+		/// Checks that arguments are not null or empty.
+		/// </summary>
+		/// <typeparam name="T">Anonymous object type.</typeparam>
+		/// <param name="args">Arguments holder.</param>
+		/// <returns>Arguments holder used for subsequent checks.</returns>
 		static public IArguments<T> NotNullOrEmpty<T>(this IArguments<T> args) where T : class
 		{
 			return args.NotNull().NotEmpty();

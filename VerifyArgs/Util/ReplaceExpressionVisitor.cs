@@ -22,7 +22,7 @@ namespace VerifyArgs.Util
 		}
 
 		/// <summary>
-		/// Visits expression node and replaces it with another node if found in <see cref="Replacements" />.
+		/// Visits expression node and replaces it with another node if needed.
 		/// </summary>
 		/// <param name="node">Node to visit.</param>
 		/// <returns>Original or replaced node.</returns>

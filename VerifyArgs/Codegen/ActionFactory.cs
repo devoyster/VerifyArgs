@@ -16,7 +16,7 @@ namespace VerifyArgs.Codegen
 		/// Generates action which checks object public properties.
 		/// </summary>
 		/// <typeparam name="THolder">Anonymous object type.</typeparam>
-		/// <typeparam name="TFake">Fake object type, use any type convenient for <paramref name="checkExpr" /> and <paramref cref="createExceptionExpr" />.</typeparam>
+		/// <typeparam name="TFake">Fake object type, use any type convenient for <paramref name="checkExpr" /> and <paramref name="createExceptionExpr" />.</typeparam>
 		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
 		/// <param name="checkExpr">Property value check lambda expression; if returns true then check id failed.</param>
 		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
@@ -33,7 +33,7 @@ namespace VerifyArgs.Codegen
 		/// Generates action which checks object public properties.
 		/// </summary>
 		/// <typeparam name="THolder">Anonymous object type.</typeparam>
-		/// <typeparam name="TFake">Fake object type, use any type convenient for <paramref name="checkExpr" /> and <paramref cref="createExceptionExpr" />.</typeparam>
+		/// <typeparam name="TFake">Fake object type, use any type convenient for <paramref name="checkExpr" /> and <paramref name="createExceptionExpr" />.</typeparam>
 		/// <typeparam name="T">Additional non-constant parameter type.</typeparam>
 		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
 		/// <param name="checkExpr">Property value check lambda expression; if returns true then check id failed.</param>
