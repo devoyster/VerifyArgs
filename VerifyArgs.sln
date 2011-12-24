@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyArgs", "VerifyArgs\VerifyArgs.csproj", "{9BA19ED5-F8AF-4C30-ABBE-3DED0F7521E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyArgs.Test", "VerifyArgs.Test\VerifyArgs.Test.csproj", "{B69ADA6B-47D4-4129-ACC5-B616AE21966C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F8ADF783-A93A-49FE-9E37-AB137FC3E543}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BA19ED5-F8AF-4C30-ABBE-3DED0F7521E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA19ED5-F8AF-4C30-ABBE-3DED0F7521E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA19ED5-F8AF-4C30-ABBE-3DED0F7521E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA19ED5-F8AF-4C30-ABBE-3DED0F7521E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69ADA6B-47D4-4129-ACC5-B616AE21966C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69ADA6B-47D4-4129-ACC5-B616AE21966C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69ADA6B-47D4-4129-ACC5-B616AE21966C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69ADA6B-47D4-4129-ACC5-B616AE21966C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
