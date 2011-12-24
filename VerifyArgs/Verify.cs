@@ -18,12 +18,14 @@
 
 		#region Plugins interface duplicate
 
+		#region CommonPlugins
+
 		public static IArguments<T> NotNull<T>(T holder) where T : class
 		{
 			return Args(holder).NotNull();
 		}
 
-		/*public static IArguments<T> NotEmpty<T>(T holder) where T : class
+		public static IArguments<T> NotEmpty<T>(T holder) where T : class
 		{
 			return Args(holder).NotEmpty();
 		}
@@ -33,10 +35,7 @@
 			return Args(holder).NotNullOrEmpty();
 		}
 
-		public static IArguments<T> GreaterThan<T>(T holder, decimal min) where T : class
-		{
-			return Args(holder).GreaterThan(min);
-		}*/
+		#endregion
 
 		#endregion
 	}

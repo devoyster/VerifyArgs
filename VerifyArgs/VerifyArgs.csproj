@@ -45,7 +45,7 @@
     <Compile Include="Codegen\ActionFactory.cs" />
     <Compile Include="Codegen\TypeUtil.cs" />
     <Compile Include="IArguments.cs" />
-    <Compile Include="Plugins.cs" />
+    <Compile Include="CommonPlugins.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ExpressionUtil.cs" />
     <Compile Include="Util\ReplaceExpressionVisitor.cs" />
