@@ -8,34 +8,35 @@
 		/// <summary>
 		/// Provides interface for argument checks.
 		/// </summary>
+		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments Args(object holder)
+		public static IArguments<T> Args<T>(T holder) where T : class
 		{
-			return new ArgumentsImpl(holder);
+			return new ArgumentsImpl<T>(holder);
 		}
 
 		#region Plugins interface duplicate
 
-		public static void NotNull(object holder)
+		public static IArguments<T> NotNull<T>(T holder) where T : class
 		{
-			Args(holder).NotNull();
+			return Args(holder).NotNull();
 		}
 
-		public static void NotEmpty(object holder)
+		/*public static IArguments<T> NotEmpty<T>(T holder) where T : class
 		{
-			Args(holder).NotEmpty();
+			return Args(holder).NotEmpty();
 		}
 
-		public static void NotNullOrEmpty(object holder)
+		public static IArguments<T> NotNullOrEmpty<T>(T holder) where T : class
 		{
-			Args(holder).NotNullOrEmpty();
+			return Args(holder).NotNullOrEmpty();
 		}
 
-		public static void GreaterThan(object holder, decimal min)
+		public static IArguments<T> GreaterThan<T>(T holder, decimal min) where T : class
 		{
-			Args(holder).GreaterThan(min);
-		}
+			return Args(holder).GreaterThan(min);
+		}*/
 
 		#endregion
 	}

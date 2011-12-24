@@ -6,22 +6,26 @@ namespace VerifyArgs
 {
 	#region NotNull()
 
-	static public class NotNullPlugin
+	public static class NotNullPlugin
 	{
-		private static readonly Func<Type, Action<object>> Generator = GenFactory.CreateGenerator<object>(
-			t => !t.IsValueType,
-			x => x == null,
-			(n, _) => new ArgumentNullException(n));
-
-		static public IArguments NotNull(this IArguments args)
+		private static class Check<T> where T : class
 		{
-			return args.Verify(Generator);
+			public static readonly Action<T> Action = ActionFactory.Generate<T, object>(
+				t => !t.IsValueType,
+				x => x == null,
+				(n, _) => new ArgumentNullException(n));
+		}
+
+		static public IArguments<T> NotNull<T>(this IArguments<T> args) where T : class
+		{
+			Check<T>.Action(args.Holder);
+			return args;
 		}
 	}
 
 	#endregion
 
-	#region NotEmpty()
+	/*#region NotEmpty()
 
 	static public class NotEmptyPlugin
 	{
@@ -65,5 +69,5 @@ namespace VerifyArgs
 		}
 	}
 
-	#endregion
+	#endregion*/
 }

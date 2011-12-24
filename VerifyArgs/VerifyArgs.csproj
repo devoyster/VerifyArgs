@@ -14,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\VerifyArgs\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,15 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentsImpl.cs" />
-    <Compile Include="Codegen\ArgumentsUtil.cs" />
-    <Compile Include="Codegen\GenFactory.cs" />
+    <Compile Include="Codegen\ActionFactory.cs" />
     <Compile Include="Codegen\TypeUtil.cs" />
     <Compile Include="IArguments.cs" />
     <Compile Include="Plugins.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\EnumerableUtil.cs" />
     <Compile Include="Util\ExpressionUtil.cs" />
-    <Compile Include="Util\ReaderWriterLockSlimUtil.cs" />
     <Compile Include="Util\ReplaceExpressionVisitor.cs" />
     <Compile Include="Verify.cs" />
   </ItemGroup>

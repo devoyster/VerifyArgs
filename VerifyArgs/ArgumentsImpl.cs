@@ -3,15 +3,16 @@
 	/// <summary>
 	/// Arguments holder implementation.
 	/// </summary>
-	internal sealed class ArgumentsImpl : IArguments
+	/// <typeparam name="THolder">Anonymous object type.</typeparam>
+	internal sealed class ArgumentsImpl<THolder> : IArguments<THolder> where THolder : class
 	{
-		private readonly object _holder;
+		private readonly THolder _holder;
 
 		/// <summary>
-		/// Creates new <see cref="ArgumentsImpl" /> instance.
+		/// Creates new <see cref="ArgumentsImpl{THolder}" /> instance.
 		/// </summary>
-		/// <param name="holder"></param>
-		public ArgumentsImpl(object holder)
+		/// <param name="holder">Anonymous object which contains arguments to verify.</param>
+		public ArgumentsImpl(THolder holder)
 		{
 			_holder = holder;
 		}
@@ -19,7 +20,7 @@
 		/// <summary>
 		/// Gets anonymous object which contains arguments to verify.
 		/// </summary>
-		public object Holder
+		public THolder Holder
 		{
 			get { return _holder; }
 		}

@@ -10,23 +10,22 @@ namespace VerifyArgs.Test
 		[Test]
 		public void NotNull()
 		{
-			Func<object, Action> exec = obj => () => Verify.NotNull(obj);
-			exec(new { test = (string)null })
+			NotNullAction(new { test = (string)null })
 				.Should().Throw<ArgumentNullException>()
 				.And.Exception.ParamName.Should().Be("test");
-			exec(new { test = (string)null, test2 = (object)null })
+			NotNullAction(new { test = (string)null, test2 = (object)null })
 				.Should().Throw<ArgumentNullException>()
 				.And.Exception.ParamName.Should().Be("test");
-			exec(new { test = "123", test2 = (object)null })
+			NotNullAction(new { test = "123", test2 = (object)null })
 				.Should().Throw<ArgumentNullException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			Verify.NotNull(null);
-			Verify.NotNull(new { test = "123" });
-			Verify.NotNull(new { test = "123", test2 = 1 });
+			NotNullAction((object)null)();
+			NotNullAction(new { test = "123" })();
+			NotNullAction(new { test = "123", test2 = 1 })();
 		}
 
-		[Test]
+		/*[Test]
 		public void NotEmpty()
 		{
 			Func<object, Action> exec = obj => () => Verify.NotEmpty(obj);
@@ -79,6 +78,11 @@ namespace VerifyArgs.Test
 			Func<object, Action> exec = obj => () => Verify.GreaterThan(obj, 10);
 			exec(new { test = (string)null, test2 = 8 })
 				.Should().Throw<ArgumentOutOfRangeException>();
+		}*/
+
+		private Action NotNullAction<T>(T holder) where T : class
+		{
+			return Executing.This(() => Verify.Args(holder).NotNull());
 		}
 	}
 }
