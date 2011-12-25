@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="ArgumentsImpl.cs" />
     <Compile Include="Codegen\ActionFactory.cs" />
-    <Compile Include="Codegen\ActionFactory.MoreParams.cs">
+    <Compile Include="Codegen\ActionFactory.MoreParams.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ActionFactory.MoreParams.tt</DependentUpon>
@@ -72,7 +72,7 @@
   <ItemGroup>
     <None Include="Codegen\ActionFactory.MoreParams.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ActionFactory.MoreParams.cs</LastGenOutput>
+      <LastGenOutput>ActionFactory.MoreParams.generated.cs</LastGenOutput>
     </None>
     <None Include="VerifyArgs.snk" />
   </ItemGroup>
