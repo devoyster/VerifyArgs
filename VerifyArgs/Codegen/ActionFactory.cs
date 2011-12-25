@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using VerifyArgs.Util;
@@ -12,13 +13,15 @@ namespace VerifyArgs.Codegen
 	/// </summary>
 	public static partial class ActionFactory
 	{
+		#region Generic wrappers
+
 		/// <summary>
 		/// Generates action which checks object public properties.
 		/// </summary>
 		/// <typeparam name="THolder">Anonymous object type.</typeparam>
 		/// <typeparam name="TArg">Common arguments supertype used in <paramref name="checkExpr" /> and <paramref name="createExceptionExpr" />.</typeparam>
 		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
-		/// <param name="checkExpr">Property value check lambda expression; if returns true then check id failed.</param>
+		/// <param name="checkExpr">Property value check lambda expression; if returns true then check is failed.</param>
 		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
 		/// <returns>Object check action.</returns>
 		public static Action<THolder> Generate<THolder, TArg>(
@@ -33,10 +36,28 @@ namespace VerifyArgs.Codegen
 		/// Generates action which checks object public properties.
 		/// </summary>
 		/// <typeparam name="THolder">Anonymous object type.</typeparam>
+		/// <typeparam name="TArg">Common arguments supertype used in <paramref name="createExceptionExpr" />.</typeparam>
+		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
+		/// <param name="checkExprFunc">Function which generates property value check expression (if returns true then check is failed).
+		/// Function obtains variable which holds property value and additional parameters.</param>
+		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
+		/// <returns>Object check action.</returns>
+		public static Action<THolder> Generate<THolder, TArg>(
+			Func<Type, bool> propertyFilter,
+			Func<ParameterExpression, IList<ParameterExpression>, Expr> checkExprFunc,
+			Expression<Func<string, TArg, Exception>> createExceptionExpr)
+		{
+			return Generate<Action<THolder>>(propertyFilter, checkExprFunc, createExceptionExpr);
+		}
+
+		/// <summary>
+		/// Generates action which checks object public properties.
+		/// </summary>
+		/// <typeparam name="THolder">Anonymous object type.</typeparam>
 		/// <typeparam name="TArg">Common arguments supertype used in <paramref name="checkExpr" /> and <paramref name="createExceptionExpr" />.</typeparam>
 		/// <typeparam name="T">Additional non-constant parameter type.</typeparam>
 		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
-		/// <param name="checkExpr">Property value check lambda expression; if returns true then check id failed.</param>
+		/// <param name="checkExpr">Property value check lambda expression; if returns true then check is failed.</param>
 		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T> Generate<THolder, TArg, T>(
@@ -50,24 +71,63 @@ namespace VerifyArgs.Codegen
 		/// <summary>
 		/// Generates action which checks object public properties.
 		/// </summary>
-		/// <typeparam name="TAction">Action type.</typeparam>
+		/// <typeparam name="THolder">Anonymous object type.</typeparam>
+		/// <typeparam name="TArg">Common arguments supertype used in <paramref name="createExceptionExpr" />.</typeparam>
+		/// <typeparam name="T">Additional non-constant parameter type.</typeparam>
 		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
-		/// <param name="checkExpr">Property value check lambda expression; if returns true then check id failed.</param>
+		/// <param name="checkExprFunc">Function which generates property value check expression (if returns true then check is failed).
+		/// Function obtains variable which holds property value and additional parameters.</param>
 		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
 		/// <returns>Object check action.</returns>
-		private static TAction Generate<TAction>(
+		public static Action<THolder, T> Generate<THolder, TArg, T>(
+			Func<Type, bool> propertyFilter,
+			Func<ParameterExpression, IList<ParameterExpression>, Expr> checkExprFunc,
+			Expression<Func<string, TArg, T, Exception>> createExceptionExpr)
+		{
+			return Generate<Action<THolder, T>>(propertyFilter, checkExprFunc, createExceptionExpr);
+		}
+
+		#endregion
+
+		/// <summary>
+		/// Generates action which checks object public properties.
+		/// </summary>
+		/// <typeparam name="TAction">Action type.</typeparam>
+		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
+		/// <param name="checkExpr">Property value check lambda expression; if returns true then check is failed.</param>
+		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
+		/// <returns>Object check action.</returns>
+		public static TAction Generate<TAction>(
 		   Func<Type, bool> propertyFilter,
 		   LambdaExpression checkExpr,
 		   LambdaExpression createExceptionExpr) where TAction : class
 		{
-			if (checkExpr == null)
-			{
-				throw new ArgumentNullException("checkExpr");
-			}
-			if (createExceptionExpr == null)
-			{
-				throw new ArgumentNullException("createExceptionExpr");
-			}
+			VerifyUtil.NotNull(checkExpr, "checkExpr");
+
+			var valueParam = checkExpr.Parameters[0];
+			return Generate<TAction>(
+				propertyFilter,
+				(valueVar, additionalParams) =>
+					ReplaceAdditionalParams(checkExpr, additionalParams).Replace(valueParam, valueVar.ConvertIfNeeded(valueParam.Type)),
+				createExceptionExpr);
+		}
+
+		/// <summary>
+		/// Generates action which checks object public properties.
+		/// </summary>
+		/// <typeparam name="TAction">Action type.</typeparam>
+		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
+		/// <param name="checkExprFunc">Function which generates property value check expression (if returns true then check is failed).
+		/// Function obtains variable which holds property value and additional parameters.</param>
+		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
+		/// <returns>Object check action.</returns>
+		public static TAction Generate<TAction>(
+		   Func<Type, bool> propertyFilter,
+		   Func<ParameterExpression, IList<ParameterExpression>, Expr> checkExprFunc,
+		   LambdaExpression createExceptionExpr) where TAction : class
+		{
+			VerifyUtil.NotNull(checkExprFunc, "checkExprFunc");
+			VerifyUtil.NotNull(createExceptionExpr, "createExceptionExpr");
 
 			Type type = typeof(TAction).GetGenericArguments()[0];
 
@@ -75,22 +135,10 @@ namespace VerifyArgs.Codegen
 			var objectParam = Expr.Parameter(type);
 			var additionalParams = typeof(TAction).GetGenericArguments().Skip(1).Select(Expr.Parameter).ToList();
 
-			// Take checkExpr lambda, extract first parameter from it and replace additional parameters in body
-			Func<LambdaExpression, Expression> replaceAdditionalParams =
-				expr =>
-					expr
-						.Parameters
-						.Skip(expr.Parameters.Count - additionalParams.Count)
-						.Zip(additionalParams, (from, to) => new { from, to })
-						.Aggregate(expr.Body, (body, x) => body.Replace(x.from, x.to));
-
-			var checkObjectParam = checkExpr.Parameters[0];
-			var checkBody = replaceAdditionalParams(checkExpr);
-
-			// Similar for createExceptionExpr lambda
+			// Take createExceptionExpr lambda, extract first parameter from it and replace additional parameters in body
 			var exceptionNameParam = createExceptionExpr.Parameters[0];
 			var exceptionObjectParam = createExceptionExpr.Parameters[1];
-			var exceptionBody = replaceAdditionalParams(createExceptionExpr);
+			var exceptionBody = ReplaceAdditionalParams(createExceptionExpr, additionalParams);
 
 			// Obtain type public properties to check
 			propertyFilter = propertyFilter ?? (_ => true);
@@ -101,23 +149,16 @@ namespace VerifyArgs.Codegen
 				.Select(
 					pi =>
 					{
-						var valueVar = Expr.Variable(checkObjectParam.Type);
-
-						Expr propertyValue = Expr.Property(objectParam, pi);
-						if (valueVar.Type != propertyValue.Type)
-						{
-							propertyValue = Expr.Convert(propertyValue, valueVar.Type);
-						}
-
+						var valueVar = Expr.Variable(pi.PropertyType);
 						return Expr.Block(
 							new[] { valueVar },
-							Expr.Assign(valueVar, propertyValue),
+							Expr.Assign(valueVar, Expr.Property(objectParam, pi)),
 							Expr.IfThen(
-								checkBody.Replace(checkObjectParam, valueVar),
+								checkExprFunc(valueVar, additionalParams),
 								Expr.Throw(
 									exceptionBody
 										.Replace(exceptionNameParam, Expr.Constant(pi.Name))
-										.Replace(exceptionObjectParam, valueVar))));
+										.Replace(exceptionObjectParam, valueVar.ConvertIfNeeded(exceptionObjectParam.Type)))));
 					})
 				.ToList();
 
@@ -138,6 +179,15 @@ namespace VerifyArgs.Codegen
 				lambdaBody,
 				new[] { objectParam }.Concat(additionalParams));
 			return lambda.Compile();
+		}
+
+		private static Expr ReplaceAdditionalParams(LambdaExpression lambda, IList<ParameterExpression> additionalParams)
+		{
+			return lambda
+				.Parameters
+				.Skip(lambda.Parameters.Count - additionalParams.Count)
+				.Zip(additionalParams, (from, to) => new { from, to })
+				.Aggregate(lambda.Body, (body, x) => body.Replace(x.from, x.to));
 		}
 	}
 }

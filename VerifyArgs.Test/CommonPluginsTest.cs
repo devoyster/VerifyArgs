@@ -44,6 +44,24 @@ namespace VerifyArgs.Test
 		}
 
 		[Test]
+		public void NotDefault()
+		{
+			NotDefaultAction(new { test = 0 })
+				.Should().Throw<ArgumentException>()
+				.And.Exception.ParamName.Should().Be("test");
+			NotDefaultAction(new { test = Guid.Empty, test2 = DateTime.MinValue })
+				.Should().Throw<ArgumentException>()
+				.And.Exception.ParamName.Should().Be("test");
+			NotDefaultAction(new { test = 1, test2 = DateTime.MinValue })
+				.Should().Throw<ArgumentException>()
+				.And.Exception.ParamName.Should().Be("test2");
+
+			NotDefaultAction((object)null)();
+			NotDefaultAction(new { test = 1 })();
+			NotDefaultAction(new { test = 1, test2 = "0", test3 = Guid.NewGuid() })();
+		}
+
+		[Test]
 		public void NotNullOrEmpty()
 		{
 			NotNullOrEmptyAction(new { test = (string)null })
@@ -78,6 +96,11 @@ namespace VerifyArgs.Test
 		private Action NotEmptyAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).NotEmpty());
+		}
+
+		private Action NotDefaultAction<T>(T holder) where T : class
+		{
+			return Executing.This(() => Verify.Args(holder).NotDefault());
 		}
 
 		private Action NotNullOrEmptyAction<T>(T holder) where T : class

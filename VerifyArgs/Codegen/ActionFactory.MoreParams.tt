@@ -2,6 +2,7 @@
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace VerifyArgs.Codegen
@@ -12,6 +13,17 @@ namespace VerifyArgs.Codegen
 for (int i = 2; i <= 14; i++)
 {
 	var genericParams = string.Join(", ", Enumerable.Range(1, i).Select(j => "T" + j));
+
+	Action renderParamsDoc =
+		() =>
+		{
+			for (int j = 1; j <= i; j++)
+			{
+#>
+		/// <typeparam name="T<#= j #>">Additional non-constant parameter #<#= j #> type.</typeparam>
+<#
+			}
+		};
 
 	if (i > 2)
 	{
@@ -26,15 +38,10 @@ for (int i = 2; i <= 14; i++)
 		/// <typeparam name="THolder">Anonymous object type.</typeparam>
 		/// <typeparam name="TArg">Common arguments supertype used in <paramref name="checkExpr" /> and <paramref name="createExceptionExpr" />.</typeparam>
 <#
-	for (int j = 1; j <= i; j++)
-	{
-#>
-		/// <typeparam name="T<#= j #>">Additional non-constant parameter #<#= j #> type.</typeparam>
-<#
-	}
+	renderParamsDoc();
 #>
 		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
-		/// <param name="checkExpr">Property value check lambda expression; if returns true then check id failed.</param>
+		/// <param name="checkExpr">Property value check lambda expression; if returns true then check is failed.</param>
 		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, <#= genericParams #>> Generate<THolder, TArg, <#= genericParams #>>(
@@ -43,6 +50,27 @@ for (int i = 2; i <= 14; i++)
 			Expression<Func<string, TArg, <#= genericParams #>, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, <#= genericParams #>>>(propertyFilter, checkExpr, createExceptionExpr);
+		}
+
+		/// <summary>
+		/// Generates action which checks object public properties.
+		/// </summary>
+		/// <typeparam name="THolder">Anonymous object type.</typeparam>
+		/// <typeparam name="TArg">Common arguments supertype used in <paramref name="createExceptionExpr" />.</typeparam>
+<#
+	renderParamsDoc();
+#>
+		/// <param name="propertyFilter">Object public properties filter; can be null to generate code for all the properties.</param>
+		/// <param name="checkExprFunc">Function which generates property value check expression (if returns true then check is failed).
+		/// Function obtains variable which holds property value and additional parameters.</param>
+		/// <param name="createExceptionExpr">New exception creation expression used when check is failed.</param>
+		/// <returns>Object check action.</returns>
+		public static Action<THolder, <#= genericParams #>> Generate<THolder, TArg, <#= genericParams #>>(
+			Func<Type, bool> propertyFilter,
+			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Expression<Func<string, TArg, <#= genericParams #>, Exception>> createExceptionExpr)
+		{
+			return Generate<Action<THolder, <#= genericParams #>>>(propertyFilter, checkExprFunc, createExceptionExpr);
 		}
 <#
 }

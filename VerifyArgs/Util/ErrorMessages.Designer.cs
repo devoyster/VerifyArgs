@@ -106,6 +106,15 @@ namespace VerifyArgs.Util {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value can&apos;t be default..
+        /// </summary>
+        internal static string NotDefault {
+            get {
+                return ResourceManager.GetString("NotDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value can&apos;t be empty..
         /// </summary>
         internal static string NotEmpty {

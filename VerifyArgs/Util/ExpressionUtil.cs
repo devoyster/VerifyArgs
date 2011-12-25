@@ -17,15 +17,21 @@ namespace VerifyArgs.Util
 		/// <returns>Transformed <paramref name="node" />.</returns>
 		public static Expression Replace(this Expression node, Expression original, Expression replacement)
 		{
-			if (original == null)
-			{
-				throw new ArgumentNullException("original");
-			}
-			if (replacement == null)
-			{
-				throw new ArgumentNullException("replacement");
-			}
+			VerifyUtil.NotNull(original, "original");
+			VerifyUtil.NotNull(replacement, "replacement");
 			return new ReplaceExpressionVisitor(original, replacement).Visit(node);
+		}
+
+		/// <summary>
+		/// Wraps expression into convert expression but only if expression is not of given type.
+		/// </summary>
+		/// <param name="node">Expression to convert.</param>
+		/// <param name="newType">Type to convert to.</param>
+		/// <returns>Converted expression.</returns>
+		public static Expression ConvertIfNeeded(this Expression node, Type newType)
+		{
+			VerifyUtil.NotNull(newType, "newType");
+			return node.Type != newType ? Expression.Convert(node, newType) : node;
 		}
 	}
 }

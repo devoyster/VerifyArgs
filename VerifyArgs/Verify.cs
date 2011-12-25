@@ -43,6 +43,17 @@
 		}
 
 		/// <summary>
+		/// Checks that value-type arguments are not having default values.
+		/// </summary>
+		/// <typeparam name="T">Anonymous object type.</typeparam>
+		/// <param name="holder">Anonymous object which contains arguments to verify.</param>
+		/// <returns>Arguments holder used for subsequent checks.</returns>
+		public static IArguments<T> NotDefault<T>(T holder) where T : class
+		{
+			return Args(holder).NotDefault();
+		}
+
+		/// <summary>
 		/// Checks that arguments are not null or empty.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>

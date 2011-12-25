@@ -3,6 +3,8 @@ using System.Collections;
 using VerifyArgs.Codegen;
 using VerifyArgs.Util;
 
+using Expr = System.Linq.Expressions.Expression;
+
 namespace VerifyArgs
 {
 	#region NotNull()
@@ -57,6 +59,36 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		static public IArguments<T> NotEmpty<T>(this IArguments<T> args) where T : class
+		{
+			Check<T>.Action(args.Holder);
+			return args;
+		}
+	}
+
+	#endregion
+
+	#region NotDefault()
+
+	/// <summary>
+	/// <see cref="NotDefault{T}" /> method plugin.
+	/// </summary>
+	static public class NotDefaultPlugin
+	{
+		private static class Check<T> where T : class
+		{
+			public static readonly Action<T> Action = ActionFactory.Generate<T, object>(
+				t => t.IsValueType,
+				(valueVar, _) => Expr.Call(valueVar, "Equals", null, Expr.Default(valueVar.Type)),
+				(n, _) => new ArgumentException(ErrorMessages.NotDefault, n));
+		}
+
+		/// <summary>
+		/// Checks that value-type arguments are not having default values.
+		/// </summary>
+		/// <typeparam name="T">Anonymous object type.</typeparam>
+		/// <param name="args">Arguments holder.</param>
+		/// <returns>Arguments holder used for subsequent checks.</returns>
+		static public IArguments<T> NotDefault<T>(this IArguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
 			return args;

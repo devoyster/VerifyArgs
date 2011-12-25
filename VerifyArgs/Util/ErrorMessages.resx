@@ -132,6 +132,9 @@
   <data name="LessThanOrEqual" xml:space="preserve">
     <value>Value should be less than or equal {0}.</value>
   </data>
+  <data name="NotDefault" xml:space="preserve">
+    <value>Value can't be default.</value>
+  </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Value can't be empty.</value>
   </data>
