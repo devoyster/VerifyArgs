@@ -30,7 +30,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="minLength">Minimal argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> LengthGreaterThan<T>(this IArguments<T> args, int minLength) where T : class
+		public static IArguments<T> LengthGreaterThan<T>(this IArguments<T> args, int minLength) where T : class
 		{
 			Check<T>.Action(args.Holder, minLength);
 			return args;
@@ -61,7 +61,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="minLength">Minimal argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> LengthGreaterThanOrEqual<T>(this IArguments<T> args, int minLength) where T : class
+		public static IArguments<T> LengthGreaterThanOrEqual<T>(this IArguments<T> args, int minLength) where T : class
 		{
 			Check<T>.Action(args.Holder, minLength);
 			return args;
@@ -92,7 +92,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="maxLength">Maximal argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> LengthLessThan<T>(this IArguments<T> args, int maxLength) where T : class
+		public static IArguments<T> LengthLessThan<T>(this IArguments<T> args, int maxLength) where T : class
 		{
 			Check<T>.Action(args.Holder, maxLength);
 			return args;
@@ -123,7 +123,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="maxLength">Maximal argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> LengthLessThanOrEqual<T>(this IArguments<T> args, int maxLength) where T : class
+		public static IArguments<T> LengthLessThanOrEqual<T>(this IArguments<T> args, int maxLength) where T : class
 		{
 			Check<T>.Action(args.Holder, maxLength);
 			return args;
@@ -135,9 +135,9 @@ namespace VerifyArgs
 	#region LengthEquals()
 
 	/// <summary>
-	/// <see cref="LengthEquals{T}" /> method plugin.
+	/// <see cref="LengthEqual{T}" /> method plugin.
 	/// </summary>
-	public static class LengthEqualsPlugin
+	public static class LengthEqualPlugin
 	{
 		private static class Check<T> where T : class
 		{
@@ -154,7 +154,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="length">Expected argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> LengthEquals<T>(this IArguments<T> args, int length) where T : class
+		public static IArguments<T> LengthEqual<T>(this IArguments<T> args, int length) where T : class
 		{
 			Check<T>.Action(args.Holder, length);
 			return args;
@@ -186,7 +186,7 @@ namespace VerifyArgs
 		/// <param name="minLength">Minimal argument length.</param>
 		/// <param name="maxLength">Maximal argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> LengthInRange<T>(this IArguments<T> args, int minLength, int maxLength) where T : class
+		public static IArguments<T> LengthInRange<T>(this IArguments<T> args, int minLength, int maxLength) where T : class
 		{
 			Check<T>.Action(args.Holder, minLength, maxLength);
 			return args;

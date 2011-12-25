@@ -83,7 +83,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static IArguments<T> Positive<T>(T holder) where T : class
 		{
-			return Args(holder).NotNull();
+			return Args(holder).Positive();
 		}
 
 		/// <summary>

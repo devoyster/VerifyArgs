@@ -191,47 +191,47 @@ namespace VerifyArgs.Test
 			NotPositiveAction(new { test = 0, test2 = -1.0 })();
 		}
 
-		private Action GreaterThanAction<T>(T holder, decimal min) where T : class
+		private static Action GreaterThanAction<T>(T holder, decimal min) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).GreaterThan(min));
 		}
 
-		private Action GreaterThanOrEqualAction<T>(T holder, decimal min) where T : class
+		private static Action GreaterThanOrEqualAction<T>(T holder, decimal min) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).GreaterThanOrEqual(min));
 		}
 
-		private Action LessThanAction<T>(T holder, decimal max) where T : class
+		private static Action LessThanAction<T>(T holder, decimal max) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).LessThan(max));
 		}
 
-		private Action LessThanOrEqualAction<T>(T holder, decimal max) where T : class
+		private static Action LessThanOrEqualAction<T>(T holder, decimal max) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).LessThanOrEqual(max));
 		}
 
-		private Action InRangeAction<T>(T holder, decimal min, decimal max) where T : class
+		private static Action InRangeAction<T>(T holder, decimal min, decimal max) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).InRange(min, max));
 		}
 
-		private Action PositiveAction<T>(T holder) where T : class
+		private static Action PositiveAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).Positive());
 		}
 
-		private Action NotNegativeAction<T>(T holder) where T : class
+		private static Action NotNegativeAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).NotNegative());
 		}
 
-		private Action NegativeAction<T>(T holder) where T : class
+		private static Action NegativeAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).Negative());
 		}
 
-		private Action NotPositiveAction<T>(T holder) where T : class
+		private static Action NotPositiveAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).NotPositive());
 		}

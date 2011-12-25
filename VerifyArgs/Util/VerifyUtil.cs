@@ -13,7 +13,7 @@ namespace VerifyArgs.Util
 		/// </summary>
 		/// <param name="arg">Argument to check.</param>
 		/// <param name="name">Argument name.</param>
-		static public void NotNull(object arg, string name)
+		public static void NotNull(object arg, string name)
 		{
 			if (arg == null)
 			{

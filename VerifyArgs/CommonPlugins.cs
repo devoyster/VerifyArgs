@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using VerifyArgs.Codegen;
 using VerifyArgs.Util;
 
@@ -29,7 +28,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> NotNull<T>(this IArguments<T> args) where T : class
+		public static IArguments<T> NotNull<T>(this IArguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
 			return args;
@@ -43,13 +42,20 @@ namespace VerifyArgs
 	/// <summary>
 	/// <see cref="NotEmpty{T}" /> method plugin.
 	/// </summary>
-	static public class NotEmptyPlugin
+	public static class NotEmptyPlugin
 	{
 		private static class Check<T> where T : class
 		{
-			public static readonly Action<T> Action = ActionFactory.Generate<T, IEnumerable>(
-				t => typeof(IEnumerable).IsAssignableFrom(t),
-				x => x != null && !x.GetEnumerator().MoveNext(),
+			public static readonly Action<T> Action = ActionFactory.Generate<T, object>(
+				TypeUtil.HasLengthProperty,
+				(valueVar, _) =>
+				{
+					var lengthExpr = Expr.Property(valueVar, valueVar.Type.HasProperty("Length") ? "Length" : "Count");
+					Expr body = Expr.Equal(lengthExpr, Expr.Constant(0));
+					return valueVar.Type.IsValueType
+						? body
+						: Expr.AndAlso(Expr.ReferenceNotEqual(valueVar, Expr.Constant(null)), body);
+				},
 				(n, _) => new ArgumentException(ErrorMessages.NotEmpty, n));
 		}
 
@@ -60,7 +66,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> NotEmpty<T>(this IArguments<T> args) where T : class
+		public static IArguments<T> NotEmpty<T>(this IArguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
 			return args;
@@ -74,7 +80,7 @@ namespace VerifyArgs
 	/// <summary>
 	/// <see cref="NotDefault{T}" /> method plugin.
 	/// </summary>
-	static public class NotDefaultPlugin
+	public static class NotDefaultPlugin
 	{
 		private static class Check<T> where T : class
 		{
@@ -91,7 +97,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> NotDefault<T>(this IArguments<T> args) where T : class
+		public static IArguments<T> NotDefault<T>(this IArguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
 			return args;
@@ -105,7 +111,7 @@ namespace VerifyArgs
 	/// <summary>
 	/// <see cref="NotNullOrEmpty{T}" /> method plugin.
 	/// </summary>
-	static public class NotNullOrEmptyPlugin
+	public static class NotNullOrEmptyPlugin
 	{
 		/// <summary>
 		/// Checks that arguments are not null or empty.
@@ -114,7 +120,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		static public IArguments<T> NotNullOrEmpty<T>(this IArguments<T> args) where T : class
+		public static IArguments<T> NotNullOrEmpty<T>(this IArguments<T> args) where T : class
 		{
 			return args.NotNull().NotEmpty();
 		}

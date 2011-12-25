@@ -88,22 +88,22 @@ namespace VerifyArgs.Test
 			NotNullOrEmptyAction(new { test = "123", test2 = 1 })();
 		}
 
-		private Action NotNullAction<T>(T holder) where T : class
+		private static Action NotNullAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).NotNull());
 		}
 
-		private Action NotEmptyAction<T>(T holder) where T : class
+		private static Action NotEmptyAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).NotEmpty());
 		}
 
-		private Action NotDefaultAction<T>(T holder) where T : class
+		private static Action NotDefaultAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).NotDefault());
 		}
 
-		private Action NotNullOrEmptyAction<T>(T holder) where T : class
+		private static Action NotNullOrEmptyAction<T>(T holder) where T : class
 		{
 			return Executing.This(() => Verify.Args(holder).NotNullOrEmpty());
 		}
