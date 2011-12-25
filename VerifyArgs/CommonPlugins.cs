@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using VerifyArgs.Codegen;
+using VerifyArgs.Util;
 
 namespace VerifyArgs
 {
@@ -45,8 +46,8 @@ namespace VerifyArgs
 		{
 			public static readonly Action<T> Action = ActionFactory.Generate<T, IEnumerable>(
 				t => typeof(IEnumerable).IsAssignableFrom(t),
-				x => x != null && !((IEnumerable)x).GetEnumerator().MoveNext(),
-				(n, _) => new ArgumentException("Value can't be empty.", n));
+				x => x != null && !x.GetEnumerator().MoveNext(),
+				(n, _) => new ArgumentException(ErrorMessages.NotEmpty, n));
 		}
 
 		/// <summary>
