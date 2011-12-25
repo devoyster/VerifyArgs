@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://verifyargs.codeplex.com/license</licenseUrl>
+    <projectUrl>http://verifyargs.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright © 2011, Andriy Kozachuk</copyright>
+    <tags>method parameters arguments assert ArgumentNullException ArgumentException NotNull NotEmpty</tags>
+  </metadata>
+</package>

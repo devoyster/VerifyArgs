@@ -11,7 +11,7 @@
 		/// <summary>
 		/// Creates new <see cref="ArgumentsImpl{THolder}" /> instance.
 		/// </summary>
-		/// <param name="holder">Anonymous object which contains arguments to verify.</param>
+		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		public ArgumentsImpl(THolder holder)
 		{
 			_holder = holder;

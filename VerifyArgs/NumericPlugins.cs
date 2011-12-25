@@ -21,6 +21,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that numeric arguments are greather than <paramref name="min" />.
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -51,6 +52,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that numeric arguments are greather than or equal <paramref name="min" />.
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -81,6 +83,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that numeric arguments are less than <paramref name="max" />.
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -111,6 +114,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that numeric arguments are less than or equal <paramref name="max" />.
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -134,14 +138,14 @@ namespace VerifyArgs
 	{
 		private static class Check<T> where T : class
 		{
-			public static readonly Action<T, decimal, decimal> Action = ActionFactory.Generate<T, decimal, decimal, decimal>(
-				TypeUtil.IsNumeric,
+			public static readonly Action<T, decimal, decimal> Action = NumericPluginsUtil.Generate<T>(
 				(x, min, max) => x < min || x > max,
-				(n, x, min, max) => new ArgumentOutOfRangeException(n, x, string.Format(ErrorMessages.InRange, min, max)));
+				ErrorMessages.InRange);
 		}
 
 		/// <summary>
 		/// Checks that numeric arguments are in given range (inclusive).
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -166,6 +170,7 @@ namespace VerifyArgs
 	{
 		/// <summary>
 		/// Checks that numeric arguments are positive (greater than zero).
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -187,6 +192,7 @@ namespace VerifyArgs
 	{
 		/// <summary>
 		/// Checks that numeric arguments are not negative (greater than or equal zero).
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -208,6 +214,7 @@ namespace VerifyArgs
 	{
 		/// <summary>
 		/// Checks that numeric arguments are negative (less than zero).
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -229,6 +236,7 @@ namespace VerifyArgs
 	{
 		/// <summary>
 		/// Checks that numeric arguments are not positive (less than or equal zero).
+		/// Throws <see cref="ArgumentOutOfRangeException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -249,6 +257,14 @@ namespace VerifyArgs
 				TypeUtil.IsNumeric,
 				checkExpr,
 				(n, x, param) => new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, param)));
+		}
+
+		public static Action<T, decimal, decimal> Generate<T>(Expression<Func<decimal, decimal, decimal, bool>> checkExpr, string errorMessage)
+		{
+			return ActionFactory.Generate<T, decimal, decimal, decimal>(
+				TypeUtil.IsNumeric,
+				checkExpr,
+				(n, x, p1, p2) => new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, p1, p2)));
 		}
 	}
 }

@@ -24,6 +24,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that string/collection arguments length is greather than <paramref name="minLength" />.
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -54,6 +55,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that string/collection arguments length is greather than or equal <paramref name="minLength" />.
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -84,6 +86,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that string/collection arguments length is less than <paramref name="maxLength" />.
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -114,6 +117,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that string/collection arguments length is less than or equal <paramref name="maxLength" />.
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -144,6 +148,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that string/collection arguments length equals <paramref name="length" />.
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -174,6 +179,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that string/collection arguments length is in given range (inclusive).
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>

@@ -24,6 +24,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that arguments are not null.
+		/// Throws <see cref="ArgumentNullException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -54,6 +55,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that arguments are not empty strings/collections.
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -84,6 +86,7 @@ namespace VerifyArgs
 
 		/// <summary>
 		/// Checks that value-type arguments are not having default values.
+		/// Throws <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
@@ -106,6 +109,7 @@ namespace VerifyArgs
 	{
 		/// <summary>
 		/// Checks that arguments are not null or empty.
+		/// Throws <see cref="ArgumentNullException" /> or <see cref="ArgumentException" /> if check is failed.
 		/// </summary>
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>

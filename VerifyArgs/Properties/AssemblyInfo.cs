@@ -4,7 +4,7 @@ using System.Reflection;
 [assembly: CLSCompliant(true)]
 
 [assembly: AssemblyTitle("VerifyArgs")]
-[assembly: AssemblyDescription("Method arguments verification library")]
+[assembly: AssemblyDescription("Contains Verify - fast and extensible class for simple method arguments asserts. Example: Verify.NotNull(new { param1, param2 }).")]
 [assembly: AssemblyCompany("Andriy Kozachuk")]
 [assembly: AssemblyProduct("VerifyArgs")]
 [assembly: AssemblyCopyright("Copyright © 2011, Andriy Kozachuk")]
