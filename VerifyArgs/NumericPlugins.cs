@@ -150,10 +150,6 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		static public IArguments<T> InRange<T>(this IArguments<T> args, decimal min, decimal max) where T : class
 		{
-			if (max < min)
-			{
-				throw new ArgumentException("Range should not be empty", "max");
-			}
 			Check<T>.Action(args.Holder, min, max);
 			return args;
 		}

@@ -108,7 +108,7 @@ namespace VerifyArgs.Codegen
 			return Generate<TAction>(
 				propertyFilter,
 				(valueVar, additionalParams) =>
-					ReplaceAdditionalParams(checkExpr, additionalParams).Replace(valueParam, valueVar.ConvertIfNeeded(valueParam.Type)),
+					checkExpr.ReplaceParams(additionalParams).Replace(valueParam, valueVar.ConvertIfNeeded(valueParam.Type)),
 				createExceptionExpr);
 		}
 
@@ -138,7 +138,7 @@ namespace VerifyArgs.Codegen
 			// Take createExceptionExpr lambda, extract first parameter from it and replace additional parameters in body
 			var exceptionNameParam = createExceptionExpr.Parameters[0];
 			var exceptionObjectParam = createExceptionExpr.Parameters[1];
-			var exceptionBody = ReplaceAdditionalParams(createExceptionExpr, additionalParams);
+			var exceptionBody = createExceptionExpr.ReplaceParams(additionalParams);
 
 			// Obtain type public properties to check
 			propertyFilter = propertyFilter ?? (_ => true);
@@ -179,15 +179,6 @@ namespace VerifyArgs.Codegen
 				lambdaBody,
 				new[] { objectParam }.Concat(additionalParams));
 			return lambda.Compile();
-		}
-
-		private static Expr ReplaceAdditionalParams(LambdaExpression lambda, IList<ParameterExpression> additionalParams)
-		{
-			return lambda
-				.Parameters
-				.Skip(lambda.Parameters.Count - additionalParams.Count)
-				.Zip(additionalParams, (from, to) => new { from, to })
-				.Aggregate(lambda.Body, (body, x) => body.Replace(x.from, x.to));
 		}
 	}
 }

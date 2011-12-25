@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace VerifyArgs.Util
@@ -20,6 +22,22 @@ namespace VerifyArgs.Util
 			VerifyUtil.NotNull(original, "original");
 			VerifyUtil.NotNull(replacement, "replacement");
 			return new ReplaceExpressionVisitor(original, replacement).Visit(node);
+		}
+
+		/// <summary>
+		/// Replaces last N lambda expression parameters with provided N parameters
+		/// </summary>
+		/// <param name="lambda">Lambda expression which parameters to replace.</param>
+		/// <param name="replacementParams">N replacement parameters.</param>
+		/// <returns>Lambda expression body with parameters replaced.</returns>
+		public static Expression ReplaceParams(this LambdaExpression lambda, IList<ParameterExpression> replacementParams)
+		{
+			VerifyUtil.NotNull(replacementParams, "replacementParams");
+			return lambda
+				.Parameters
+				.Skip(lambda.Parameters.Count - replacementParams.Count)
+				.Zip(replacementParams, (from, to) => new { from, to })
+				.Aggregate(lambda.Body, (body, x) => body.Replace(x.from, x.to));
 		}
 
 		/// <summary>

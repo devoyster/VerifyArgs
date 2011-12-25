@@ -55,6 +55,7 @@
       <DependentUpon>ActionFactory.MoreParams.tt</DependentUpon>
     </Compile>
     <Compile Include="Codegen\TypeUtil.cs" />
+    <Compile Include="LengthPlugins.cs" />
     <Compile Include="NumericPlugins.cs" />
     <Compile Include="IArguments.cs" />
     <Compile Include="CommonPlugins.cs" />

@@ -89,7 +89,8 @@ namespace VerifyArgs.Test
 		public void InRange()
 		{
 			InRangeAction(new { test = 2 }, 4, 3)
-				.Should().Throw<ArgumentException>();
+				.Should().Throw<ArgumentOutOfRangeException>()
+				.And.Exception.ParamName.Should().Be("test");
 			InRangeAction(new { test = 2 }, 3, 3)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test");

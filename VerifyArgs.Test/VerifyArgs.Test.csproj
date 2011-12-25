@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LengthPluginsTest.cs" />
     <Compile Include="NumericPluginsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonPluginsTest.cs" />

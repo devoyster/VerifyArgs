@@ -88,6 +88,60 @@ namespace VerifyArgs.Util {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value length should be equal {0}..
+        /// </summary>
+        internal static string LengthEquals {
+            get {
+                return ResourceManager.GetString("LengthEquals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value length should be greater than {0}..
+        /// </summary>
+        internal static string LengthGreaterThan {
+            get {
+                return ResourceManager.GetString("LengthGreaterThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value length should be greater than or equal {0}..
+        /// </summary>
+        internal static string LengthGreaterThanOrEqual {
+            get {
+                return ResourceManager.GetString("LengthGreaterThanOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value length should be in range [{0},{1}]..
+        /// </summary>
+        internal static string LengthInRange {
+            get {
+                return ResourceManager.GetString("LengthInRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value length should be less than {0}..
+        /// </summary>
+        internal static string LengthLessThan {
+            get {
+                return ResourceManager.GetString("LengthLessThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value length should be less than or equal {0}..
+        /// </summary>
+        internal static string LengthLessThanOrEqual {
+            get {
+                return ResourceManager.GetString("LengthLessThanOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value should be less than {0}..
         /// </summary>
         internal static string LessThan {

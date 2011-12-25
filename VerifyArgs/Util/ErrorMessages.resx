@@ -126,6 +126,24 @@
   <data name="InRange" xml:space="preserve">
     <value>Value should be in range [{0},{1}].</value>
   </data>
+  <data name="LengthEquals" xml:space="preserve">
+    <value>Value length should be equal {0}.</value>
+  </data>
+  <data name="LengthGreaterThan" xml:space="preserve">
+    <value>Value length should be greater than {0}.</value>
+  </data>
+  <data name="LengthGreaterThanOrEqual" xml:space="preserve">
+    <value>Value length should be greater than or equal {0}.</value>
+  </data>
+  <data name="LengthInRange" xml:space="preserve">
+    <value>Value length should be in range [{0},{1}].</value>
+  </data>
+  <data name="LengthLessThan" xml:space="preserve">
+    <value>Value length should be less than {0}.</value>
+  </data>
+  <data name="LengthLessThanOrEqual" xml:space="preserve">
+    <value>Value length should be less than or equal {0}.</value>
+  </data>
   <data name="LessThan" xml:space="preserve">
     <value>Value should be less than {0}.</value>
   </data>
