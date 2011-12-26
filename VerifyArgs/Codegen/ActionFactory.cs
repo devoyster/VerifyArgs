@@ -44,7 +44,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder> Generate<THolder, TArg>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expr> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expr> checkExprFunc,
 			Expression<Func<string, TArg, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -81,7 +81,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T> Generate<THolder, TArg, T>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expr> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expr> checkExprFunc,
 			Expression<Func<string, TArg, T, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -123,7 +123,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static TAction Generate<TAction>(
 		   Func<Type, bool> propertyFilter,
-		   Func<ParameterExpression, IList<ParameterExpression>, Expr> checkExprFunc,
+		   Func<Expression, IList<ParameterExpression>, Expr> checkExprFunc,
 		   LambdaExpression createExceptionExpr) where TAction : class
 		{
 			VerifyUtil.NotNull(checkExprFunc, "checkExprFunc");

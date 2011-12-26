@@ -77,7 +77,7 @@ for (int i = 2; i <= 14; i++)
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, <#= genericParams #>> Generate<THolder, TArg, <#= genericParams #>>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, <#= genericParams #>, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, <#= genericParams #>>>(propertyFilter, checkExprFunc, createExceptionExpr);

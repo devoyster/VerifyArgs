@@ -17,7 +17,7 @@ namespace VerifyArgs
 		{
 			public static readonly Action<T> Action = ActionFactory.Generate<T, object>(
 				t => !t.IsValueType,
-				x => x == null,
+				(valueVar, _) => Expr.ReferenceEqual(valueVar, Expr.Constant(null)),
 				(n, _) => new ArgumentNullException(n));
 		}
 
@@ -28,7 +28,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotNull<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> NotNull<T>(this Arguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
 			return args;
@@ -66,7 +66,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotEmpty<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> NotEmpty<T>(this Arguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
 			return args;
@@ -97,7 +97,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotDefault<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> NotDefault<T>(this Arguments<T> args) where T : class
 		{
 			Check<T>.Action(args.Holder);
 			return args;
@@ -120,7 +120,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotNullOrEmpty<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> NotNullOrEmpty<T>(this Arguments<T> args) where T : class
 		{
 			return args.NotNull().NotEmpty();
 		}

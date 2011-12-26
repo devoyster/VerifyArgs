@@ -13,9 +13,9 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> Args<T>(T holder) where T : class
+		public static Arguments<T> Args<T>(T holder) where T : class
 		{
-			return new ArgumentsImpl<T>(holder);
+			return new Arguments<T>(holder);
 		}
 
 		#region Plugins interface duplicate for plugin methods without additional parameters
@@ -29,7 +29,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotNull<T>(T holder) where T : class
+		public static Arguments<T> NotNull<T>(T holder) where T : class
 		{
 			return Args(holder).NotNull();
 		}
@@ -41,7 +41,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotEmpty<T>(T holder) where T : class
+		public static Arguments<T> NotEmpty<T>(T holder) where T : class
 		{
 			return Args(holder).NotEmpty();
 		}
@@ -53,7 +53,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotDefault<T>(T holder) where T : class
+		public static Arguments<T> NotDefault<T>(T holder) where T : class
 		{
 			return Args(holder).NotDefault();
 		}
@@ -65,7 +65,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotNullOrEmpty<T>(T holder) where T : class
+		public static Arguments<T> NotNullOrEmpty<T>(T holder) where T : class
 		{
 			return Args(holder).NotNullOrEmpty();
 		}
@@ -81,7 +81,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> Positive<T>(T holder) where T : class
+		public static Arguments<T> Positive<T>(T holder) where T : class
 		{
 			return Args(holder).Positive();
 		}
@@ -93,7 +93,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotNegative<T>(T holder) where T : class
+		public static Arguments<T> NotNegative<T>(T holder) where T : class
 		{
 			return Args(holder).NotNegative();
 		}
@@ -105,7 +105,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> Negative<T>(T holder) where T : class
+		public static Arguments<T> Negative<T>(T holder) where T : class
 		{
 			return Args(holder).Negative();
 		}
@@ -117,7 +117,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotPositive<T>(T holder) where T : class
+		public static Arguments<T> NotPositive<T>(T holder) where T : class
 		{
 			return Args(holder).NotPositive();
 		}

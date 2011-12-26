@@ -27,7 +27,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="min">Minimal argument value.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> GreaterThan<T>(this IArguments<T> args, decimal min) where T : class
+		public static Arguments<T> GreaterThan<T>(this Arguments<T> args, decimal min) where T : class
 		{
 			Check<T>.Action(args.Holder, min);
 			return args;
@@ -58,7 +58,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="min">Minimal argument value.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> GreaterThanOrEqual<T>(this IArguments<T> args, decimal min) where T : class
+		public static Arguments<T> GreaterThanOrEqual<T>(this Arguments<T> args, decimal min) where T : class
 		{
 			Check<T>.Action(args.Holder, min);
 			return args;
@@ -89,7 +89,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="max">Maximal argument value.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> LessThan<T>(this IArguments<T> args, decimal max) where T : class
+		public static Arguments<T> LessThan<T>(this Arguments<T> args, decimal max) where T : class
 		{
 			Check<T>.Action(args.Holder, max);
 			return args;
@@ -120,7 +120,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="max">Maximal argument value.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> LessThanOrEqual<T>(this IArguments<T> args, decimal max) where T : class
+		public static Arguments<T> LessThanOrEqual<T>(this Arguments<T> args, decimal max) where T : class
 		{
 			Check<T>.Action(args.Holder, max);
 			return args;
@@ -152,7 +152,7 @@ namespace VerifyArgs
 		/// <param name="min">Minimal argument value.</param>
 		/// <param name="max">Maximal argument value.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> InRange<T>(this IArguments<T> args, decimal min, decimal max) where T : class
+		public static Arguments<T> InRange<T>(this Arguments<T> args, decimal min, decimal max) where T : class
 		{
 			Check<T>.Action(args.Holder, min, max);
 			return args;
@@ -175,7 +175,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> Positive<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> Positive<T>(this Arguments<T> args) where T : class
 		{
 			return args.GreaterThan(0);
 		}
@@ -197,7 +197,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotNegative<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> NotNegative<T>(this Arguments<T> args) where T : class
 		{
 			return args.GreaterThanOrEqual(0);
 		}
@@ -219,7 +219,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> Negative<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> Negative<T>(this Arguments<T> args) where T : class
 		{
 			return args.LessThan(0);
 		}
@@ -241,7 +241,7 @@ namespace VerifyArgs
 		/// <typeparam name="T">Anonymous object type.</typeparam>
 		/// <param name="args">Arguments holder.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static IArguments<T> NotPositive<T>(this IArguments<T> args) where T : class
+		public static Arguments<T> NotPositive<T>(this Arguments<T> args) where T : class
 		{
 			return args.LessThanOrEqual(0);
 		}

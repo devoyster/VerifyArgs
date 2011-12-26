@@ -48,7 +48,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2> Generate<THolder, TArg, T1, T2>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -89,7 +89,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3> Generate<THolder, TArg, T1, T2, T3>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -132,7 +132,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4> Generate<THolder, TArg, T1, T2, T3, T4>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -177,7 +177,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5> Generate<THolder, TArg, T1, T2, T3, T4, T5>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -224,7 +224,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -273,7 +273,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -324,7 +324,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7, T8>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, T8, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -377,7 +377,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -432,7 +432,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -489,7 +489,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -548,7 +548,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -609,7 +609,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>(propertyFilter, checkExprFunc, createExceptionExpr);
@@ -672,7 +672,7 @@ namespace VerifyArgs.Codegen
 		/// <returns>Object check action.</returns>
 		public static Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Generate<THolder, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Func<Type, bool> propertyFilter,
-			Func<ParameterExpression, IList<ParameterExpression>, Expression> checkExprFunc,
+			Func<Expression, IList<ParameterExpression>, Expression> checkExprFunc,
 			Expression<Func<string, TArg, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Exception>> createExceptionExpr)
 		{
 			return Generate<Action<THolder, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>(propertyFilter, checkExprFunc, createExceptionExpr);
