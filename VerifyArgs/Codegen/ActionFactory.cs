@@ -162,18 +162,10 @@ namespace VerifyArgs.Codegen
 					})
 				.ToList();
 
-			Expression lambdaBody;
-			if (propertyChecks.Any())
-			{
-				lambdaBody = Expr.IfThen(
-					Expr.ReferenceNotEqual(objectParam, Expr.Constant(null)),
-					propertyChecks.Count == 1 ? propertyChecks[0] : Expr.Block(propertyChecks));
-			}
-			else
-			{
-				lambdaBody = Expr.Default(typeof(void));
-			}
-
+			var lambdaBody = propertyChecks.Any()
+				? (propertyChecks.Count == 1 ? (Expr)propertyChecks[0] : Expr.Block(propertyChecks))
+				: Expr.Default(typeof(void));
+			
 			// Pull it all together, execute checks only if supplied object is not null
 			var lambda = Expr.Lambda<TAction>(
 				lambdaBody,
