@@ -176,7 +176,7 @@ namespace VerifyArgs.Codegen
 						.Concat(propertyChecks)
 						.Concat(new Expr[] { objectParam }))
 				: objectParam;
-			
+
 			// Pull it all together, execute checks only if supplied object is not null
 			var lambda = Expr.Lambda<TVerifier>(
 				lambdaBody,

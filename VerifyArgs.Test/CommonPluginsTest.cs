@@ -20,9 +20,6 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentNullException>()
 				.And.Exception.ParamName.Should().Be("test2");
 			
-			NotNullAction((object)null)
-				.Should().Throw<ArgumentNullException>();
-
 			NotNullAction(new { test = "123" })();
 			NotNullAction(new { test = "123", test2 = 1 })();
 		}
@@ -40,9 +37,6 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			NotEmptyAction((object)null)
-				.Should().Throw<ArgumentNullException>();
-
 			NotEmptyAction(new { test = "123" })();
 			NotEmptyAction(new { test = "123", test2 = 1 })();
 		}
@@ -59,9 +53,6 @@ namespace VerifyArgs.Test
 			NotDefaultAction(new { test = 1, test2 = DateTime.MinValue })
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test2");
-
-			NotDefaultAction((object)null)
-				.Should().Throw<ArgumentNullException>();
 
 			NotDefaultAction(new { test = 1 })();
 			NotDefaultAction(new { test = 1, test2 = "0", test3 = Guid.NewGuid() })();

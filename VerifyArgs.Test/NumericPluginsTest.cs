@@ -23,9 +23,6 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			GreaterThanAction((object)null, 1)
-				.Should().Throw<ArgumentNullException>();
-
 			GreaterThanAction(new { test = 2 }, 1)();
 			GreaterThanAction(new { test = 2, test2 = 3.0 }, 1)();
 		}
@@ -42,9 +39,6 @@ namespace VerifyArgs.Test
 			GreaterThanOrEqualAction(new { test = 2, test2 = 0.5 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
-
-			GreaterThanOrEqualAction((object)null, 1)
-				.Should().Throw<ArgumentNullException>();
 
 			GreaterThanOrEqualAction(new { test = 1 }, 1)();
 			GreaterThanOrEqualAction(new { test = 1, test2 = 2.0 }, 1)();
@@ -66,9 +60,6 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			LessThanAction((object)null, 1)
-				.Should().Throw<ArgumentNullException>();
-
 			LessThanAction(new { test = 0 }, 1)();
 			LessThanAction(new { test = 0, test2 = -1.0 }, 1)();
 		}
@@ -85,9 +76,6 @@ namespace VerifyArgs.Test
 			LessThanOrEqualAction(new { test = 0, test2 = 1.5 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
-
-			LessThanOrEqualAction((object)null, 1)
-				.Should().Throw<ArgumentNullException>();
 
 			LessThanOrEqualAction(new { test = 1 }, 1)();
 			LessThanOrEqualAction(new { test = 1, test2 = 0.0 }, 1)();
@@ -115,9 +103,6 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			InRangeAction((object)null, 2, 4)
-				.Should().Throw<ArgumentNullException>();
-
 			InRangeAction(new { test = 3 }, 3, 3)();
 			InRangeAction(new { test = 2 }, 2, 4)();
 			InRangeAction(new { test = 3, test2 = 4.0 }, 2, 4)();
@@ -139,9 +124,6 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			PositiveAction((object)null)
-				.Should().Throw<ArgumentNullException>();
-
 			PositiveAction(new { test = 1 })();
 			PositiveAction(new { test = 1, test2 = 2.0 })();
 		}
@@ -158,9 +140,6 @@ namespace VerifyArgs.Test
 			NotNegativeAction(new { test = 1, test2 = -0.5 })
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
-
-			NotNegativeAction((object)null)
-				.Should().Throw<ArgumentNullException>();
 
 			NotNegativeAction(new { test = 0 })();
 			NotNegativeAction(new { test = 0, test2 = 1.0 })();
@@ -182,9 +161,6 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			NegativeAction((object)null)
-				.Should().Throw<ArgumentNullException>();
-
 			NegativeAction(new { test = -1 })();
 			NegativeAction(new { test = -1, test2 = -2.0 })();
 		}
@@ -201,9 +177,6 @@ namespace VerifyArgs.Test
 			NotPositiveAction(new { test = 0, test2 = 0.5 })
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
-
-			NotPositiveAction((object)null)
-				.Should().Throw<ArgumentNullException>();
 
 			NotPositiveAction(new { test = 0 })();
 			NotPositiveAction(new { test = 0, test2 = -1.0 })();

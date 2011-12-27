@@ -19,7 +19,6 @@ namespace VerifyArgs
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
 		public Arguments(THolder holder)
 		{
-			VerifyUtil.NotNull(holder, "holder");
 			Holder = holder;
 		}
 	}
