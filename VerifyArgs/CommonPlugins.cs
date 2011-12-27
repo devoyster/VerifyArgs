@@ -13,9 +13,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class NotNullPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T> Action = ActionFactory.Generate<T, object>(
+			public static readonly Func<Arguments<T>, Arguments<T>> Verifier = VerifierFactory.Create<T, object>(
 				t => !t.IsValueType,
 				(valueVar, _) => Expr.ReferenceEqual(valueVar, Expr.Constant(null)),
 				(n, _) => new ArgumentNullException(n));
@@ -30,8 +30,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> NotNull<T>(this Arguments<T> args) where T : class
 		{
-			Check<T>.Action(args.Holder);
-			return args;
+			return Cache<T>.Verifier(args);
 		}
 	}
 
@@ -44,9 +43,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class NotEmptyPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T> Action = ActionFactory.Generate<T, object>(
+			public static readonly Func<Arguments<T>, Arguments<T>> Verifier = VerifierFactory.Create<T, object>(
 				TypeUtil.HasLengthProperty,
 				(valueVar, _) =>
 				{
@@ -68,8 +67,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> NotEmpty<T>(this Arguments<T> args) where T : class
 		{
-			Check<T>.Action(args.Holder);
-			return args;
+			return Cache<T>.Verifier(args);
 		}
 	}
 
@@ -82,9 +80,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class NotDefaultPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T> Action = ActionFactory.Generate<T, object>(
+			public static readonly Func<Arguments<T>, Arguments<T>> Verifier = VerifierFactory.Create<T, object>(
 				t => t.IsValueType,
 				(valueVar, _) => Expr.Call(valueVar, "Equals", null, Expr.Default(valueVar.Type)),
 				(n, _) => new ArgumentException(ErrorMessages.NotDefault, n));
@@ -99,30 +97,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> NotDefault<T>(this Arguments<T> args) where T : class
 		{
-			Check<T>.Action(args.Holder);
-			return args;
-		}
-	}
-
-	#endregion
-
-	#region NotNullOrEmpty()
-
-	/// <summary>
-	/// <see cref="NotNullOrEmpty{T}" /> method plugin.
-	/// </summary>
-	public static class NotNullOrEmptyPlugin
-	{
-		/// <summary>
-		/// Checks that arguments are not null or empty.
-		/// Throws <see cref="ArgumentNullException" /> or <see cref="ArgumentException" /> if check is failed.
-		/// </summary>
-		/// <typeparam name="T">Anonymous object type.</typeparam>
-		/// <param name="args">Arguments holder.</param>
-		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static Arguments<T> NotNullOrEmpty<T>(this Arguments<T> args) where T : class
-		{
-			return args.NotNull().NotEmpty();
+			return Cache<T>.Verifier(args);
 		}
 	}
 

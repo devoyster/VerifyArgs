@@ -58,18 +58,6 @@ namespace VerifyArgs
 			return Args(holder).NotDefault();
 		}
 
-		/// <summary>
-		/// Checks that arguments are not null or empty.
-		/// Throws <see cref="ArgumentNullException" /> or <see cref="ArgumentException" /> if check is failed.
-		/// </summary>
-		/// <typeparam name="T">Anonymous object type.</typeparam>
-		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
-		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static Arguments<T> NotNullOrEmpty<T>(T holder) where T : class
-		{
-			return Args(holder).NotNullOrEmpty();
-		}
-
 		#endregion
 
 		#region NumericPlugins

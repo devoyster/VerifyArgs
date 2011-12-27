@@ -48,11 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguments.cs" />
-    <Compile Include="Codegen\ActionFactory.cs" />
-    <Compile Include="Codegen\ActionFactory.MoreParams.generated.cs">
+    <Compile Include="Codegen\VerifierFactory.cs" />
+    <Compile Include="Codegen\VerifierFactory.MoreParams.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ActionFactory.MoreParams.tt</DependentUpon>
+      <DependentUpon>VerifierFactory.MoreParams.tt</DependentUpon>
     </Compile>
     <Compile Include="Codegen\TypeUtil.cs" />
     <Compile Include="LengthPlugins.cs" />
@@ -70,9 +70,9 @@
     <Compile Include="Verify.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Codegen\ActionFactory.MoreParams.tt">
+    <None Include="Codegen\VerifierFactory.MoreParams.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ActionFactory.MoreParams.generated.cs</LastGenOutput>
+      <LastGenOutput>VerifierFactory.MoreParams.generated.cs</LastGenOutput>
     </None>
     <None Include="VerifyArgs.snk" />
   </ItemGroup>

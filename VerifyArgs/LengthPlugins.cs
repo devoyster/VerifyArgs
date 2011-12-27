@@ -15,9 +15,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LengthGreaterThanPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, int> Action = LengthPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, minLength) => x <= minLength,
 				ErrorMessages.LengthGreaterThan);
 		}
@@ -32,8 +32,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LengthGreaterThan<T>(this Arguments<T> args, int minLength) where T : class
 		{
-			Check<T>.Action(args.Holder, minLength);
-			return args;
+			return Cache<T>.Verifier(args, minLength);
 		}
 	}
 
@@ -46,9 +45,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LengthGreaterThanOrEqualPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, int> Action = LengthPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, minLength) => x < minLength,
 				ErrorMessages.GreaterThanOrEqual);
 		}
@@ -63,8 +62,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LengthGreaterThanOrEqual<T>(this Arguments<T> args, int minLength) where T : class
 		{
-			Check<T>.Action(args.Holder, minLength);
-			return args;
+			return Cache<T>.Verifier(args, minLength);
 		}
 	}
 
@@ -77,9 +75,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LengthLessThanPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, int> Action = LengthPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, maxLength) => x >= maxLength,
 				ErrorMessages.LengthLessThan);
 		}
@@ -94,8 +92,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LengthLessThan<T>(this Arguments<T> args, int maxLength) where T : class
 		{
-			Check<T>.Action(args.Holder, maxLength);
-			return args;
+			return Cache<T>.Verifier(args, maxLength);
 		}
 	}
 
@@ -108,9 +105,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LengthLessThanOrEqualPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, int> Action = LengthPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, maxLength) => x > maxLength,
 				ErrorMessages.LengthLessThanOrEqual);
 		}
@@ -125,8 +122,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LengthLessThanOrEqual<T>(this Arguments<T> args, int maxLength) where T : class
 		{
-			Check<T>.Action(args.Holder, maxLength);
-			return args;
+			return Cache<T>.Verifier(args, maxLength);
 		}
 	}
 
@@ -139,9 +135,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LengthEqualPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, int> Action = LengthPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, length) => x != length,
 				ErrorMessages.LengthEquals);
 		}
@@ -156,8 +152,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LengthEqual<T>(this Arguments<T> args, int length) where T : class
 		{
-			Check<T>.Action(args.Holder, length);
-			return args;
+			return Cache<T>.Verifier(args, length);
 		}
 	}
 
@@ -170,9 +165,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LengthInRangePlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, int, int> Action = LengthPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, int, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, minLength, maxLength) => x < minLength || x > maxLength,
 				ErrorMessages.LengthInRange);
 		}
@@ -188,8 +183,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LengthInRange<T>(this Arguments<T> args, int minLength, int maxLength) where T : class
 		{
-			Check<T>.Action(args.Holder, minLength, maxLength);
-			return args;
+			return Cache<T>.Verifier(args, minLength, maxLength);
 		}
 	}
 
@@ -197,17 +191,17 @@ namespace VerifyArgs
 
 	internal static class LengthPluginsUtil
 	{
-		public static Action<T, int> Generate<T>(Expression<Func<int, int, bool>> checkExpr, string errorMessage)
+		public static Func<Arguments<T>, int, Arguments<T>> Create<T>(Expression<Func<int, int, bool>> checkExpr, string errorMessage) where T : class
 		{
-			return ActionFactory.Generate<T, object, int>(
+			return VerifierFactory.Create<T, object, int>(
 				TypeUtil.HasLengthProperty,
 				CreateCheckExprFunc(checkExpr),
 				(n, _, param) => new ArgumentException(string.Format(errorMessage, param), n));
 		}
 
-		public static Action<T, int, int> Generate<T>(Expression<Func<int, int, int, bool>> checkExpr, string errorMessage)
+		public static Func<Arguments<T>, int, int, Arguments<T>> Create<T>(Expression<Func<int, int, int, bool>> checkExpr, string errorMessage) where T : class
 		{
-			return ActionFactory.Generate<T, object, int, int>(
+			return VerifierFactory.Create<T, object, int, int>(
 				TypeUtil.HasLengthProperty,
 				CreateCheckExprFunc(checkExpr),
 				(n, _, p1, p2) => new ArgumentException(string.Format(errorMessage, p1, p2), n));

@@ -12,9 +12,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class GreaterThanPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, decimal> Action = NumericPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, decimal, Arguments<T>> Verifier = NumericPluginsUtil.Create<T>(
 				(x, min) => x <= min,
 				ErrorMessages.GreaterThan);
 		}
@@ -29,8 +29,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> GreaterThan<T>(this Arguments<T> args, decimal min) where T : class
 		{
-			Check<T>.Action(args.Holder, min);
-			return args;
+			return Cache<T>.Verifier(args, min);
 		}
 	}
 
@@ -43,9 +42,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class GreaterThanOrEqualPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, decimal> Action = NumericPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, decimal, Arguments<T>> Verifier = NumericPluginsUtil.Create<T>(
 				(x, min) => x < min,
 				ErrorMessages.GreaterThanOrEqual);
 		}
@@ -60,8 +59,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> GreaterThanOrEqual<T>(this Arguments<T> args, decimal min) where T : class
 		{
-			Check<T>.Action(args.Holder, min);
-			return args;
+			return Cache<T>.Verifier(args, min);
 		}
 	}
 
@@ -74,9 +72,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LessThanPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, decimal> Action = NumericPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, decimal, Arguments<T>> Verifier = NumericPluginsUtil.Create<T>(
 				(x, max) => x >= max,
 				ErrorMessages.LessThan);
 		}
@@ -91,8 +89,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LessThan<T>(this Arguments<T> args, decimal max) where T : class
 		{
-			Check<T>.Action(args.Holder, max);
-			return args;
+			return Cache<T>.Verifier(args, max);
 		}
 	}
 
@@ -105,9 +102,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class LessThanOrEqualPlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, decimal> Action = NumericPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, decimal, Arguments<T>> Verifier = NumericPluginsUtil.Create<T>(
 				(x, max) => x > max,
 				ErrorMessages.LessThanOrEqual);
 		}
@@ -122,8 +119,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> LessThanOrEqual<T>(this Arguments<T> args, decimal max) where T : class
 		{
-			Check<T>.Action(args.Holder, max);
-			return args;
+			return Cache<T>.Verifier(args, max);
 		}
 	}
 
@@ -136,9 +132,9 @@ namespace VerifyArgs
 	/// </summary>
 	public static class InRangePlugin
 	{
-		private static class Check<T> where T : class
+		private static class Cache<T> where T : class
 		{
-			public static readonly Action<T, decimal, decimal> Action = NumericPluginsUtil.Generate<T>(
+			public static readonly Func<Arguments<T>, decimal, decimal, Arguments<T>> Verifier = NumericPluginsUtil.Create<T>(
 				(x, min, max) => x < min || x > max,
 				ErrorMessages.InRange);
 		}
@@ -154,8 +150,7 @@ namespace VerifyArgs
 		/// <returns>Arguments holder used for subsequent checks.</returns>
 		public static Arguments<T> InRange<T>(this Arguments<T> args, decimal min, decimal max) where T : class
 		{
-			Check<T>.Action(args.Holder, min, max);
-			return args;
+			return Cache<T>.Verifier(args, min, max);
 		}
 	}
 
@@ -251,17 +246,17 @@ namespace VerifyArgs
 
 	internal static class NumericPluginsUtil
 	{
-		public static Action<T, decimal> Generate<T>(Expression<Func<decimal, decimal, bool>> checkExpr, string errorMessage)
+		public static Func<Arguments<T>, decimal, Arguments<T>> Create<T>(Expression<Func<decimal, decimal, bool>> checkExpr, string errorMessage) where T : class
 		{
-			return ActionFactory.Generate<T, decimal, decimal>(
+			return VerifierFactory.Create<T, decimal, decimal>(
 				TypeUtil.IsNumeric,
 				checkExpr,
 				(n, x, param) => new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, param)));
 		}
 
-		public static Action<T, decimal, decimal> Generate<T>(Expression<Func<decimal, decimal, decimal, bool>> checkExpr, string errorMessage)
+		public static Func<Arguments<T>, decimal, decimal, Arguments<T>> Create<T>(Expression<Func<decimal, decimal, decimal, bool>> checkExpr, string errorMessage) where T : class
 		{
-			return ActionFactory.Generate<T, decimal, decimal, decimal>(
+			return VerifierFactory.Create<T, decimal, decimal, decimal>(
 				TypeUtil.IsNumeric,
 				checkExpr,
 				(n, x, p1, p2) => new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, p1, p2)));
