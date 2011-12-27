@@ -43,6 +43,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgumentsTest.cs" />
+    <Compile Include="Codegen\TypeUtilTest.cs" />
+    <Compile Include="Codegen\VerifierFactoryTest.cs" />
+    <Compile Include="VerifyTest.cs" />
     <Compile Include="LengthPluginsTest.cs" />
     <Compile Include="NumericPluginsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
