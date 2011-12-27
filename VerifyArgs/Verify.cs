@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VerifyArgs
+﻿namespace VerifyArgs
 {
 	/// <summary>
 	/// Helpers for argument checks.

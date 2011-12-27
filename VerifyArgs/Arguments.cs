@@ -1,23 +1,21 @@
-﻿using VerifyArgs.Util;
-
-namespace VerifyArgs
+﻿namespace VerifyArgs
 {
 	/// <summary>
 	/// Holds arguments to verify.
 	/// </summary>
-	/// <typeparam name="THolder">Anonymous object type.</typeparam>
-	public struct Arguments<THolder> where THolder : class
+	/// <typeparam name="T">Anonymous object type.</typeparam>
+	public struct Arguments<T> where T : class
 	{
 		/// <summary>
 		/// Anonymous object which contains arguments to verify.
 		/// </summary>
-		public readonly THolder Holder;
+		public readonly T Holder;
 
 		/// <summary>
 		/// Creates new <see cref="Arguments{THolder}" /> instance.
 		/// </summary>
 		/// <param name="holder">Anonymous object which contains arguments to verify. Example: new { param1, param2 }</param>
-		public Arguments(THolder holder)
+		public Arguments(T holder)
 		{
 			Holder = holder;
 		}
