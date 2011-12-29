@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial release.</releaseNotes>
-    <copyright>Copyright © 2011, Andriy Kozachuk</copyright>
+    <copyright>Copyright (c) 2011, Andriy Kozachuk</copyright>
     <tags>method parameters arguments assert ArgumentNullException ArgumentException NotNull NotEmpty code contracts</tags>
   </metadata>
 </package>
