@@ -3,12 +3,7 @@ VerifyArgs
 
 VerifyArgs is a lightweight, fast and extensible library for method arguments value checks. It's written in C# 4.0 and can be used from .NET 4.0 code. VerifyArgs contains Verify class which can be used to validate arguments of your method:
 
-    public string MyConcat(string first, string second, int secondCount)
-    {
-        Verify.Args(new { first, second }).NotNull().NotEmpty();
-        Verify.Args(new { secondCount }).Positive();
-        // your code
-    }
+<script src="https://gist.github.com/1536459.js?file=VerifyArgsExample.cs"></script>
 
 This code ensures that "first" and "second" arguments are not null/empty and "secondCount" is greater than zero. In case if validation is failed for some of the arguments Verify will throw an exception which will contain name of the parameter which failed validation; for example, if "first" is null then Verify will throw `new ArgumentNullException("first")`. And you don't need to provide parameter name explicitly!
 
@@ -83,7 +78,7 @@ As you can see, VerifyArgs is about 15x slower than native arguments check appro
 Extensibility
 -------------
 
-You can add your own VerifyArgs extension methods which will perform your checks and use runtime code generation infrastructure i.e. will be fast. Let's imagine that you need HasData() method which will check that string is not null or empty or consists of whitespace chars only. You can add it using code provided below:
+You can add your own VerifyArgs extension methods which will perform your checks and use runtime code generation infrastructure i.e. will be fast. Let's imagine that you need `HasData()` method which will check that string is not null or empty or consists of whitespace chars only. You can add it using code provided below:
 
     public static class HasDataPlugin
     {
