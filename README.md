@@ -12,7 +12,10 @@ VerifyArgs is a lightweight, fast and extensible library for method arguments va
 
 This code ensures that "first" and "second" arguments are not null/empty and "secondCount" is greater than zero. In case if validation is failed for some of the arguments Verify will throw an exception which will contain name of the parameter which failed validation; for example, if "first" is null then Verify will throw `new ArgumentNullException("first")`. And you don't need to provide parameter name explicitly!
 
-You can [download VerifyArgs from NuGet](http://nuget.org/packages/VerifyArgs).
+NuGet
+-----
+
+    PM> Install-Package VerifyArgs
 
 More Methods
 ------------
