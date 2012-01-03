@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
@@ -10,8 +10,11 @@
     <projectUrl>http://verifyargs.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>Added license text into distribution.</releaseNotes>
     <copyright>Copyright (c) 2011, Andriy Kozachuk</copyright>
     <tags>method parameters arguments assert NotNull NotEmpty code contracts</tags>
   </metadata>
+  <files>
+    <file src="..\license.txt" target="lib\net40\VerifyArgs.license.txt" />
+  </files>
 </package>
