@@ -15,6 +15,8 @@ namespace VerifyArgs.Codegen
 	/// </summary>
 	public static partial class VerifierFactory
 	{
+		private static readonly ConstructorInfo VerifyArgsExceptionCtor = typeof(VerifyArgsException).GetConstructor(new[] { typeof(string) });
+
 		#region Generic wrappers
 
 		/// <summary>
@@ -90,7 +92,7 @@ namespace VerifyArgs.Codegen
 		}
 
 		#endregion
-
+		
 		/// <summary>
 		/// Creates verifier which checks object public properties.
 		/// </summary>
@@ -142,47 +144,61 @@ namespace VerifyArgs.Codegen
 			var genericArguments = typeof(TVerifier).GetGenericArguments();
 			var additionalParams = genericArguments.Skip(1).Take(genericArguments.Length - 2).Select(Expr.Parameter).ToList();
 
-			// Take createExceptionExpr lambda, extract first parameter from it and replace additional parameters in body
-			var exceptionNameParam = createExceptionExpr.Parameters[0];
-			var exceptionObjectParam = createExceptionExpr.Parameters[1];
-			var exceptionBody = createExceptionExpr.ReplaceParams(additionalParams);
+			Expr lambdaBody;
+			if (type.IsAnonymous())
+			{
+				// Take createExceptionExpr lambda, extract first parameter from it and replace additional parameters in body
+				var exceptionNameParam = createExceptionExpr.Parameters[0];
+				var exceptionObjectParam = createExceptionExpr.Parameters[1];
+				var exceptionBody = createExceptionExpr.ReplaceParams(additionalParams);
 
-			// Obtain type public properties to check
-			propertyFilter = propertyFilter ?? (_ => true);
-			var properties = type.GetProperties().OrderBy(pi => pi.Name).Where(pi => propertyFilter(pi.PropertyType));
+				// Obtain type public properties to check
+				propertyFilter = propertyFilter ?? (_ => true);
+				var properties = type.GetProperties().OrderBy(pi => pi.Name).Where(pi => propertyFilter(pi.PropertyType));
 
-			// Obtain argument values from fields since it's faster
-			var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance).OrderBy(fi => fi.Name).Where(fi => propertyFilter(fi.FieldType)).ToList();
+				// Obtain argument values from fields since it's faster
+				var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance).OrderBy(fi => fi.Name).Where(fi => propertyFilter(fi.FieldType)).ToList();
 
-			// Generate "if (checkExpr) then throw createExceptionExpr;" for each of the properties
-			var propertyChecks = properties
-				.Select(
-					(pi, i) =>
-					{
-						var valueVar = Expr.Field(objectVar, fields[i]);
-						return Expr.IfThen(
-							checkExprFunc(valueVar, additionalParams),
-							Expr.Throw(
-								exceptionBody
-									.Replace(exceptionNameParam, Expr.Constant(pi.Name))
-									.Replace(exceptionObjectParam, valueVar.ConvertIfNeeded(exceptionObjectParam.Type))));
-					})
-				.ToList();
+				// Generate "if (checkExpr) then throw createExceptionExpr;" for each of the properties
+				var propertyChecks = properties
+					.Select(
+						(pi, i) =>
+						{
+							var valueVar = Expr.Field(objectVar, fields[i]);
+							return Expr.IfThen(
+								checkExprFunc(valueVar, additionalParams),
+								Expr.Throw(
+									exceptionBody
+										.Replace(exceptionNameParam, Expr.Constant(pi.Name))
+										.Replace(exceptionObjectParam, valueVar.ConvertIfNeeded(exceptionObjectParam.Type))));
+						})
+					.ToList();
 
-			// Prepare null check - if null is supplied then all checks are passed since nothing to check
-			var checksBody = propertyChecks.Any()
-				? Expr.IfThen(
-					Expr.ReferenceNotEqual(objectVar, Expr.Constant(null, type)),
-					propertyChecks.Count > 1 ? (Expr)Expr.Block(propertyChecks) : propertyChecks[0])
-				: null;
+				// Prepare null check - if null is supplied then all checks are passed since nothing to check
+				var checksBody = propertyChecks.Any()
+					? Expr.IfThen(
+						Expr.ReferenceNotEqual(objectVar, Expr.Constant(null, type)),
+						propertyChecks.Count > 1 ? (Expr)Expr.Block(propertyChecks) : propertyChecks[0])
+					: null;
 
-			var lambdaBody = propertyChecks.Any()
-				? (Expr)Expr.Block(
-					new[] { objectVar },
-					new Expr[] { Expr.Assign(objectVar, Expr.Field(objectParam, "Holder")) }
-						.Concat(new[] { checksBody })
-						.Concat(new[] { objectParam }))
-				: objectParam;
+				lambdaBody = propertyChecks.Any()
+					? (Expr)Expr.Block(
+						new[] { objectVar },
+						new Expr[] { Expr.Assign(objectVar, Expr.Field(objectParam, "Holder")) }
+							.Concat(new[] { checksBody })
+							.Concat(new[] { objectParam }))
+					: objectParam;
+			}
+			else
+			{
+				// Not anonymous type - throw an exception
+				lambdaBody = Expr.Block(
+					Expr.Throw(
+						Expr.New(
+							VerifyArgsExceptionCtor,
+							Expr.Constant(string.Format(ErrorMessages.NotAnonymousType, type)))),
+					objectParam);
+			}
 
 			// Pull it all together, execute checks only if supplied object is not null
 			var lambda = Expr.Lambda<TVerifier>(

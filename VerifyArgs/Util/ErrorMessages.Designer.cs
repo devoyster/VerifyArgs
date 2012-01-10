@@ -160,6 +160,15 @@ namespace VerifyArgs.Util {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verify.Args() argument is expected to be an anonymous object, actual argument is of type &quot;{0}&quot;..
+        /// </summary>
+        internal static string NotAnonymousType {
+            get {
+                return ResourceManager.GetString("NotAnonymousType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value can&apos;t be default..
         /// </summary>
         internal static string NotDefault {

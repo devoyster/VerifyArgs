@@ -68,6 +68,7 @@
     <Compile Include="Util\ReplaceExpressionVisitor.cs" />
     <Compile Include="Util\VerifyUtil.cs" />
     <Compile Include="Verify.cs" />
+    <Compile Include="VerifyArgsException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Codegen\VerifierFactory.MoreParams.tt">

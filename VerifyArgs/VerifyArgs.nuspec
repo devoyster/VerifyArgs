@@ -10,9 +10,9 @@
     <projectUrl>http://verifyargs.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added license text into distribution.</releaseNotes>
-    <copyright>Copyright (c) 2011, Andriy Kozachuk</copyright>
-    <tags>method parameters arguments assert NotNull NotEmpty code contracts</tags>
+    <releaseNotes>Enriched API.</releaseNotes>
+    <copyright>Copyright (c) 2011-2012, Andriy Kozachuk</copyright>
+    <tags>method parameters arguments assert check verify NotNull code contracts</tags>
   </metadata>
   <files>
     <file src="..\license.txt" target="lib\net40\VerifyArgs.license.txt" />
