@@ -35,7 +35,9 @@ namespace VerifyArgs.Test.Codegen
 			Executing.This(() => verifier(Data.False))
 				.Should().Throw<ArgumentException>()
 				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False") && ex.ParamName == "IsValid");
+
 			verifier(Data.True);
+			verifier(new Arguments<Data>(null));
 		}
 
 		[Test]

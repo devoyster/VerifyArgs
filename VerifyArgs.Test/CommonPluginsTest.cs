@@ -60,17 +60,17 @@ namespace VerifyArgs.Test
 
 		private static Action NotNullAction<T>(T holder) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).NotNull());
+			return () => Verify.Args(holder).NotNull();
 		}
 
 		private static Action NotEmptyAction<T>(T holder) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).NotEmpty());
+			return () => Verify.Args(holder).NotEmpty();
 		}
 
 		private static Action NotDefaultAction<T>(T holder) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).NotDefault());
+			return () => Verify.Args(holder).NotDefault();
 		}
 	}
 }

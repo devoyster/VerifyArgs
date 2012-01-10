@@ -133,32 +133,32 @@ namespace VerifyArgs.Test
 
 		private static Action LengthGreaterThanAction<T>(T holder, int min) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LengthGreaterThan(min));
+			return () => Verify.Args(holder).LengthGreaterThan(min);
 		}
 
 		private static Action LengthGreaterThanOrEqualAction<T>(T holder, int min) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LengthGreaterThanOrEqual(min));
+			return () => Verify.Args(holder).LengthGreaterThanOrEqual(min);
 		}
 
 		private static Action LengthLessThanAction<T>(T holder, int max) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LengthLessThan(max));
+			return () => Verify.Args(holder).LengthLessThan(max);
 		}
 
 		private static Action LengthLessThanOrEqualAction<T>(T holder, int max) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LengthLessThanOrEqual(max));
+			return () => Verify.Args(holder).LengthLessThanOrEqual(max);
 		}
 
 		private static Action LengthEqualAction<T>(T holder, int len) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LengthEqual(len));
+			return () => Verify.Args(holder).LengthEqual(len);
 		}
 
 		private static Action LengthInRangeAction<T>(T holder, int min, int max) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LengthInRange(min, max));
+			return () => Verify.Args(holder).LengthInRange(min, max);
 		}
 	}
 }

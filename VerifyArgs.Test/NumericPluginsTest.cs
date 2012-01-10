@@ -184,47 +184,47 @@ namespace VerifyArgs.Test
 
 		private static Action GreaterThanAction<T>(T holder, decimal min) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).GreaterThan(min));
+			return () => Verify.Args(holder).GreaterThan(min);
 		}
 
 		private static Action GreaterThanOrEqualAction<T>(T holder, decimal min) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).GreaterThanOrEqual(min));
+			return () => Verify.Args(holder).GreaterThanOrEqual(min);
 		}
 
 		private static Action LessThanAction<T>(T holder, decimal max) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LessThan(max));
+			return () => Verify.Args(holder).LessThan(max);
 		}
 
 		private static Action LessThanOrEqualAction<T>(T holder, decimal max) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).LessThanOrEqual(max));
+			return () => Verify.Args(holder).LessThanOrEqual(max);
 		}
 
 		private static Action InRangeAction<T>(T holder, decimal min, decimal max) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).InRange(min, max));
+			return () => Verify.Args(holder).InRange(min, max);
 		}
 
 		private static Action PositiveAction<T>(T holder) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).Positive());
+			return () => Verify.Args(holder).Positive();
 		}
 
 		private static Action NotNegativeAction<T>(T holder) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).NotNegative());
+			return () => Verify.Args(holder).NotNegative();
 		}
 
 		private static Action NegativeAction<T>(T holder) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).Negative());
+			return () => Verify.Args(holder).Negative();
 		}
 
 		private static Action NotPositiveAction<T>(T holder) where T : class
 		{
-			return Executing.This(() => Verify.Args(holder).NotPositive());
+			return () => Verify.Args(holder).NotPositive();
 		}
 	}
 }

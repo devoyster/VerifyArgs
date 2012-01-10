@@ -169,12 +169,19 @@ namespace VerifyArgs.Codegen
 					})
 				.ToList();
 
+			// Prepare null check - if null is supplied then all checks are passed since nothing to check
+			var checksBody = propertyChecks.Any()
+				? Expr.IfThen(
+					Expr.ReferenceNotEqual(objectVar, Expr.Constant(null, type)),
+					propertyChecks.Count > 1 ? (Expr)Expr.Block(propertyChecks) : propertyChecks[0])
+				: null;
+
 			var lambdaBody = propertyChecks.Any()
 				? (Expr)Expr.Block(
 					new[] { objectVar },
 					new Expr[] { Expr.Assign(objectVar, Expr.Field(objectParam, "Holder")) }
-						.Concat(propertyChecks)
-						.Concat(new Expr[] { objectParam }))
+						.Concat(new[] { checksBody })
+						.Concat(new[] { objectParam }))
 				: objectParam;
 
 			// Pull it all together, execute checks only if supplied object is not null
