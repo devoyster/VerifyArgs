@@ -8,48 +8,18 @@ using Expr = System.Linq.Expressions.Expression;
 
 namespace VerifyArgs
 {
-	#region LengthGreaterThan()
+	#region MinLength()
 
 	/// <summary>
-	/// <see cref="LengthGreaterThan{T}" /> method plugin.
+	/// <see cref="MinLength{T}" /> method plugin.
 	/// </summary>
-	public static class LengthGreaterThanPlugin
-	{
-		private static class Cache<T> where T : class
-		{
-			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
-				(x, minLength) => x <= minLength,
-				ErrorMessages.LengthGreaterThan);
-		}
-
-		/// <summary>
-		/// Checks that string/collection arguments length is greather than <paramref name="minLength" />.
-		/// Throws <see cref="ArgumentException" /> if check is failed.
-		/// </summary>
-		/// <typeparam name="T">Anonymous object type.</typeparam>
-		/// <param name="args">Arguments holder.</param>
-		/// <param name="minLength">Minimal argument length.</param>
-		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static Arguments<T> LengthGreaterThan<T>(this Arguments<T> args, int minLength) where T : class
-		{
-			return Cache<T>.Verifier(args, minLength);
-		}
-	}
-
-	#endregion
-
-	#region LengthGreaterThanOrEqual()
-
-	/// <summary>
-	/// <see cref="LengthGreaterThanOrEqual{T}" /> method plugin.
-	/// </summary>
-	public static class LengthGreaterThanOrEqualPlugin
+	public static class MinLengthPlugin
 	{
 		private static class Cache<T> where T : class
 		{
 			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, minLength) => x < minLength,
-				ErrorMessages.GreaterThanOrEqual);
+				ErrorMessages.MinLength);
 		}
 
 		/// <summary>
@@ -60,7 +30,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="minLength">Minimal argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static Arguments<T> LengthGreaterThanOrEqual<T>(this Arguments<T> args, int minLength) where T : class
+		public static Arguments<T> MinLength<T>(this Arguments<T> args, int minLength) where T : class
 		{
 			return Cache<T>.Verifier(args, minLength);
 		}
@@ -68,48 +38,18 @@ namespace VerifyArgs
 
 	#endregion
 
-	#region LengthLessThan()
+	#region MaxLength()
 
 	/// <summary>
-	/// <see cref="LengthLessThan{T}" /> method plugin.
+	/// <see cref="MaxLength{T}" /> method plugin.
 	/// </summary>
-	public static class LengthLessThanPlugin
-	{
-		private static class Cache<T> where T : class
-		{
-			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
-				(x, maxLength) => x >= maxLength,
-				ErrorMessages.LengthLessThan);
-		}
-
-		/// <summary>
-		/// Checks that string/collection arguments length is less than <paramref name="maxLength" />.
-		/// Throws <see cref="ArgumentException" /> if check is failed.
-		/// </summary>
-		/// <typeparam name="T">Anonymous object type.</typeparam>
-		/// <param name="args">Arguments holder.</param>
-		/// <param name="maxLength">Maximal argument length.</param>
-		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static Arguments<T> LengthLessThan<T>(this Arguments<T> args, int maxLength) where T : class
-		{
-			return Cache<T>.Verifier(args, maxLength);
-		}
-	}
-
-	#endregion
-
-	#region LengthLessThanOrEqual()
-
-	/// <summary>
-	/// <see cref="LengthLessThanOrEqual{T}" /> method plugin.
-	/// </summary>
-	public static class LengthLessThanOrEqualPlugin
+	public static class MaxLengthPlugin
 	{
 		private static class Cache<T> where T : class
 		{
 			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, maxLength) => x > maxLength,
-				ErrorMessages.LengthLessThanOrEqual);
+				ErrorMessages.MaxLength);
 		}
 
 		/// <summary>
@@ -120,7 +60,7 @@ namespace VerifyArgs
 		/// <param name="args">Arguments holder.</param>
 		/// <param name="maxLength">Maximal argument length.</param>
 		/// <returns>Arguments holder used for subsequent checks.</returns>
-		public static Arguments<T> LengthLessThanOrEqual<T>(this Arguments<T> args, int maxLength) where T : class
+		public static Arguments<T> MaxLength<T>(this Arguments<T> args, int maxLength) where T : class
 		{
 			return Cache<T>.Verifier(args, maxLength);
 		}
@@ -128,7 +68,7 @@ namespace VerifyArgs
 
 	#endregion
 
-	#region LengthEquals()
+	#region LengthEqual()
 
 	/// <summary>
 	/// <see cref="LengthEqual{T}" /> method plugin.
@@ -139,7 +79,7 @@ namespace VerifyArgs
 		{
 			public static readonly Func<Arguments<T>, int, Arguments<T>> Verifier = LengthPluginsUtil.Create<T>(
 				(x, length) => x != length,
-				ErrorMessages.LengthEquals);
+				ErrorMessages.LengthEqual);
 		}
 
 		/// <summary>

@@ -61,24 +61,6 @@ namespace VerifyArgs.Util {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value should be greater than {0}..
-        /// </summary>
-        internal static string GreaterThan {
-            get {
-                return ResourceManager.GetString("GreaterThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value should be greater than or equal {0}..
-        /// </summary>
-        internal static string GreaterThanOrEqual {
-            get {
-                return ResourceManager.GetString("GreaterThanOrEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Value should be in range [{0},{1}]..
         /// </summary>
         internal static string InRange {
@@ -90,27 +72,9 @@ namespace VerifyArgs.Util {
         /// <summary>
         ///   Looks up a localized string similar to Value length should be equal {0}..
         /// </summary>
-        internal static string LengthEquals {
+        internal static string LengthEqual {
             get {
-                return ResourceManager.GetString("LengthEquals", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value length should be greater than {0}..
-        /// </summary>
-        internal static string LengthGreaterThan {
-            get {
-                return ResourceManager.GetString("LengthGreaterThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value length should be greater than or equal {0}..
-        /// </summary>
-        internal static string LengthGreaterThanOrEqual {
-            get {
-                return ResourceManager.GetString("LengthGreaterThanOrEqual", resourceCulture);
+                return ResourceManager.GetString("LengthEqual", resourceCulture);
             }
         }
         
@@ -124,38 +88,47 @@ namespace VerifyArgs.Util {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value length should be less than {0}..
-        /// </summary>
-        internal static string LengthLessThan {
-            get {
-                return ResourceManager.GetString("LengthLessThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Value length should be less than or equal {0}..
         /// </summary>
-        internal static string LengthLessThanOrEqual {
+        internal static string MaxLength {
             get {
-                return ResourceManager.GetString("LengthLessThanOrEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value should be less than {0}..
-        /// </summary>
-        internal static string LessThan {
-            get {
-                return ResourceManager.GetString("LessThan", resourceCulture);
+                return ResourceManager.GetString("MaxLength", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Value should be less than or equal {0}..
         /// </summary>
-        internal static string LessThanOrEqual {
+        internal static string MaxValue {
             get {
-                return ResourceManager.GetString("LessThanOrEqual", resourceCulture);
+                return ResourceManager.GetString("MaxValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value length should be greater than or equal {0}..
+        /// </summary>
+        internal static string MinLength {
+            get {
+                return ResourceManager.GetString("MinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value should be greater than or equal {0}..
+        /// </summary>
+        internal static string MinValue {
+            get {
+                return ResourceManager.GetString("MinValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value should be negative (less than zero)..
+        /// </summary>
+        internal static string Negative {
+            get {
+                return ResourceManager.GetString("Negative", resourceCulture);
             }
         }
         
@@ -183,6 +156,33 @@ namespace VerifyArgs.Util {
         internal static string NotEmpty {
             get {
                 return ResourceManager.GetString("NotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value should not be negative (not less than zero)..
+        /// </summary>
+        internal static string NotNegative {
+            get {
+                return ResourceManager.GetString("NotNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value should not be positive (not greater than zero)..
+        /// </summary>
+        internal static string NotPositive {
+            get {
+                return ResourceManager.GetString("NotPositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value should be positive (greater than zero)..
+        /// </summary>
+        internal static string Positive {
+            get {
+                return ResourceManager.GetString("Positive", resourceCulture);
             }
         }
     }

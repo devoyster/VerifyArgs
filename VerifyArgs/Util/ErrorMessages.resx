@@ -117,37 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GreaterThan" xml:space="preserve">
-    <value>Value should be greater than {0}.</value>
-  </data>
-  <data name="GreaterThanOrEqual" xml:space="preserve">
+  <data name="MinValue" xml:space="preserve">
     <value>Value should be greater than or equal {0}.</value>
   </data>
   <data name="InRange" xml:space="preserve">
     <value>Value should be in range [{0},{1}].</value>
   </data>
-  <data name="LengthEquals" xml:space="preserve">
+  <data name="LengthEqual" xml:space="preserve">
     <value>Value length should be equal {0}.</value>
   </data>
-  <data name="LengthGreaterThan" xml:space="preserve">
-    <value>Value length should be greater than {0}.</value>
-  </data>
-  <data name="LengthGreaterThanOrEqual" xml:space="preserve">
+  <data name="MinLength" xml:space="preserve">
     <value>Value length should be greater than or equal {0}.</value>
   </data>
   <data name="LengthInRange" xml:space="preserve">
     <value>Value length should be in range [{0},{1}].</value>
   </data>
-  <data name="LengthLessThan" xml:space="preserve">
-    <value>Value length should be less than {0}.</value>
-  </data>
-  <data name="LengthLessThanOrEqual" xml:space="preserve">
+  <data name="MaxLength" xml:space="preserve">
     <value>Value length should be less than or equal {0}.</value>
   </data>
-  <data name="LessThan" xml:space="preserve">
-    <value>Value should be less than {0}.</value>
-  </data>
-  <data name="LessThanOrEqual" xml:space="preserve">
+  <data name="MaxValue" xml:space="preserve">
     <value>Value should be less than or equal {0}.</value>
   </data>
   <data name="NotAnonymousType" xml:space="preserve">
@@ -158,5 +146,17 @@
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Value can't be empty.</value>
+  </data>
+  <data name="Negative" xml:space="preserve">
+    <value>Value should be negative (less than zero).</value>
+  </data>
+  <data name="NotNegative" xml:space="preserve">
+    <value>Value should not be negative (not less than zero).</value>
+  </data>
+  <data name="NotPositive" xml:space="preserve">
+    <value>Value should not be positive (not greater than zero).</value>
+  </data>
+  <data name="Positive" xml:space="preserve">
+    <value>Value should be positive (greater than zero).</value>
   </data>
 </root>

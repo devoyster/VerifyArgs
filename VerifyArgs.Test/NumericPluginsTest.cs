@@ -8,77 +8,37 @@ namespace VerifyArgs.Test
 	public class NumericPluginsTest
 	{
 		[Test]
-		public void GreaterThan()
+		public void MinValue()
 		{
-			GreaterThanAction(new { test = 0 }, 1)
+			MinValueAction(new { test = 0 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test");
-			GreaterThanAction(new { test = 1 }, 1)
+			MinValueAction(new { test = 0, test2 = 0.0 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test");
-			GreaterThanAction(new { test = 0, test2 = 0.0 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
-			GreaterThanAction(new { test = 2, test2 = 1 }, 1)
+			MinValueAction(new { test = 2, test2 = 0.5 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			GreaterThanAction(new { test = 2 }, 1)();
-			GreaterThanAction(new { test = 2, test2 = 3.0 }, 1)();
+			MinValueAction(new { test = 1 }, 1)();
+			MinValueAction(new { test = 1, test2 = 2.0 }, 1)();
 		}
 
 		[Test]
-		public void GreaterThanOrEqual()
+		public void MaxValue()
 		{
-			GreaterThanOrEqualAction(new { test = 0 }, 1)
+			MaxValueAction(new { test = 2 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test");
-			GreaterThanOrEqualAction(new { test = 0, test2 = 0.0 }, 1)
+			MaxValueAction(new { test = 2, test2 = 2.0 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test");
-			GreaterThanOrEqualAction(new { test = 2, test2 = 0.5 }, 1)
+			MaxValueAction(new { test = 0, test2 = 1.5 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			GreaterThanOrEqualAction(new { test = 1 }, 1)();
-			GreaterThanOrEqualAction(new { test = 1, test2 = 2.0 }, 1)();
-		}
-
-		[Test]
-		public void LessThan()
-		{
-			LessThanAction(new { test = 2 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LessThanAction(new { test = 1 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LessThanAction(new { test = 2, test2 = 2.0 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LessThanAction(new { test = 0, test2 = 1.0 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
-
-			LessThanAction(new { test = 0 }, 1)();
-			LessThanAction(new { test = 0, test2 = -1.0 }, 1)();
-		}
-
-		[Test]
-		public void LessThanOrEqual()
-		{
-			LessThanOrEqualAction(new { test = 2 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LessThanOrEqualAction(new { test = 2, test2 = 2.0 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LessThanOrEqualAction(new { test = 0, test2 = 1.5 }, 1)
-				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
-
-			LessThanOrEqualAction(new { test = 1 }, 1)();
-			LessThanOrEqualAction(new { test = 1, test2 = 0.0 }, 1)();
+			MaxValueAction(new { test = 1 }, 1)();
+			MaxValueAction(new { test = 1, test2 = 0.0 }, 1)();
 		}
 
 		[Test]
@@ -182,24 +142,14 @@ namespace VerifyArgs.Test
 			NotPositiveAction(new { test = 0, test2 = -1.0 })();
 		}
 
-		private static Action GreaterThanAction<T>(T holder, decimal min) where T : class
+		private static Action MinValueAction<T>(T holder, decimal min) where T : class
 		{
-			return () => Verify.Args(holder).GreaterThan(min);
+			return () => Verify.Args(holder).MinValue(min);
 		}
 
-		private static Action GreaterThanOrEqualAction<T>(T holder, decimal min) where T : class
+		private static Action MaxValueAction<T>(T holder, decimal max) where T : class
 		{
-			return () => Verify.Args(holder).GreaterThanOrEqual(min);
-		}
-
-		private static Action LessThanAction<T>(T holder, decimal max) where T : class
-		{
-			return () => Verify.Args(holder).LessThan(max);
-		}
-
-		private static Action LessThanOrEqualAction<T>(T holder, decimal max) where T : class
-		{
-			return () => Verify.Args(holder).LessThanOrEqual(max);
+			return () => Verify.Args(holder).MaxValue(max);
 		}
 
 		private static Action InRangeAction<T>(T holder, decimal min, decimal max) where T : class

@@ -8,81 +8,39 @@ namespace VerifyArgs.Test
 	public class LengthPluginsTest
 	{
 		[Test]
-		public void LengthGreaterThan()
+		public void MinLength()
 		{
-			LengthGreaterThanAction(new { test = "" }, 1)
+			MinLengthAction(new { test = "" }, 1)
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test");
-			LengthGreaterThanAction(new { test = "a" }, 1)
+			MinLengthAction(new { test = "", test2 = new int[0] }, 1)
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test");
-			LengthGreaterThanAction(new { test = "", test2 = new int[0] }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LengthGreaterThanAction(new { test = "ab", test2 = new int[1] }, 1)
+			MinLengthAction(new { test = "ab", test2 = new int[0] }, 1)
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			LengthGreaterThanAction(new { test = (string)null }, 1)();
-			LengthGreaterThanAction(new { test = "ab" }, 1)();
-			LengthGreaterThanAction(new { test = "ab", test2 = new int[3] }, 1)();
+			MinLengthAction(new { test = (string)null }, 1)();
+			MinLengthAction(new { test = "a" }, 1)();
+			MinLengthAction(new { test = "a", test2 = new int[2] }, 1)();
 		}
 
 		[Test]
-		public void LengthGreaterThanOrEqual()
+		public void MaxLength()
 		{
-			LengthGreaterThanOrEqualAction(new { test = "" }, 1)
+			MaxLengthAction(new { test = "ab" }, 1)
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test");
-			LengthGreaterThanOrEqualAction(new { test = "", test2 = new int[0] }, 1)
+			MaxLengthAction(new { test = "ab", test2 = new int[2] }, 1)
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test");
-			LengthGreaterThanOrEqualAction(new { test = "ab", test2 = new int[0] }, 1)
+			MaxLengthAction(new { test = "", test2 = new int[2] }, 1)
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			LengthGreaterThanOrEqualAction(new { test = (string)null }, 1)();
-			LengthGreaterThanOrEqualAction(new { test = "a" }, 1)();
-			LengthGreaterThanOrEqualAction(new { test = "a", test2 = new int[2] }, 1)();
-		}
-
-		[Test]
-		public void LengthLessThan()
-		{
-			LengthLessThanAction(new { test = "ab" }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LengthLessThanAction(new { test = "a" }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LengthLessThanAction(new { test = "ab", test2 = new int[2] }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LengthLessThanAction(new { test = "", test2 = new int[1] }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
-
-			LengthLessThanAction(new { test = (string)null }, 1)();
-			LengthLessThanAction(new { test = "" }, 1)();
-			LengthLessThanAction(new { test = "", test2 = new int[0] }, 1)();
-		}
-
-		[Test]
-		public void LengthLessThanOrEqual()
-		{
-			LengthLessThanOrEqualAction(new { test = "ab" }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LengthLessThanOrEqualAction(new { test = "ab", test2 = new int[2] }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
-			LengthLessThanOrEqualAction(new { test = "", test2 = new int[2] }, 1)
-				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
-
-			LengthLessThanOrEqualAction(new { test = (string)null }, 1)();
-			LengthLessThanOrEqualAction(new { test = "a" }, 1)();
-			LengthLessThanOrEqualAction(new { test = "a", test2 = new int[0] }, 1)();
+			MaxLengthAction(new { test = (string)null }, 1)();
+			MaxLengthAction(new { test = "a" }, 1)();
+			MaxLengthAction(new { test = "a", test2 = new int[0] }, 1)();
 		}
 
 		[Test]
@@ -131,24 +89,14 @@ namespace VerifyArgs.Test
 			LengthInRangeAction(new { test = "abc", test2 = new int[4] }, 2, 4)();
 		}
 
-		private static Action LengthGreaterThanAction<T>(T holder, int min) where T : class
+		private static Action MinLengthAction<T>(T holder, int min) where T : class
 		{
-			return () => Verify.Args(holder).LengthGreaterThan(min);
+			return () => Verify.Args(holder).MinLength(min);
 		}
 
-		private static Action LengthGreaterThanOrEqualAction<T>(T holder, int min) where T : class
+		private static Action MaxLengthAction<T>(T holder, int max) where T : class
 		{
-			return () => Verify.Args(holder).LengthGreaterThanOrEqual(min);
-		}
-
-		private static Action LengthLessThanAction<T>(T holder, int max) where T : class
-		{
-			return () => Verify.Args(holder).LengthLessThan(max);
-		}
-
-		private static Action LengthLessThanOrEqualAction<T>(T holder, int max) where T : class
-		{
-			return () => Verify.Args(holder).LengthLessThanOrEqual(max);
+			return () => Verify.Args(holder).MaxLength(max);
 		}
 
 		private static Action LengthEqualAction<T>(T holder, int len) where T : class

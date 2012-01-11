@@ -54,7 +54,7 @@ namespace VerifyArgs.Test
 				.Should().Throw<ArgumentException>()
 				.And.Exception.ParamName.Should().Be("test2");
 
-			NotDefaultAction(new { test = 1 })();
+			NotDefaultAction(new { test = 1, test2 = (string)null })();
 			NotDefaultAction(new { test = 1, test2 = "0", test3 = Guid.NewGuid() })();
 		}
 

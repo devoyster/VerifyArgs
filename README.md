@@ -27,13 +27,14 @@ More Methods
   * NotDefault()
 * For strings and collections:
   * NotEmpty()
-  * LengthGreaterThan()/LengthGreaterThanOrEqual()
-  * LengthLessThan()/LengthLessThanOrEqual()
+  * NotNullOrEmpty()
+  * MinLength()
+  * MaxLength()
   * LengthInRange()
   * LengthEqual()
 * For numerics:
-  * GreaterThan()/GreaterThanOrEqual()
-  * LessThan()/LessThanOrEqual()
+  * MinValue()
+  * MaxValue()
   * InRange()
   * Positive()/NotNegative()
   * Negative()/NotPositive()
