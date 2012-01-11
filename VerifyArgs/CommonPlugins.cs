@@ -102,4 +102,26 @@ namespace VerifyArgs
 	}
 
 	#endregion
+
+	#region NotNullOrEmpty()
+
+	/// <summary>
+	/// <see cref="NotNullOrEmpty{T}" /> method plugin.
+	/// </summary>
+	public static class NotNullOrEmptyPlugin
+	{
+		/// <summary>
+		/// Checks that arguments are not null or empty.
+		/// Throws <see cref="ArgumentNullException" /> or <see cref="ArgumentException" /> if check is failed.
+		/// </summary>
+		/// <typeparam name="T">Anonymous object type.</typeparam>
+		/// <param name="args">Arguments holder.</param>
+		/// <returns>Arguments holder used for subsequent checks.</returns>
+		public static Arguments<T> NotNullOrEmpty<T>(this Arguments<T> args) where T : class
+		{
+			return args.NotNull().NotEmpty();
+		}
+	}
+
+	#endregion
 }
