@@ -46,6 +46,10 @@
     <Compile Include="ArgumentsTest.cs" />
     <Compile Include="Codegen\TypeUtilTest.cs" />
     <Compile Include="Codegen\VerifierFactoryTest.cs" />
+    <Compile Include="CommonPluginsTestBase.cs" />
+    <Compile Include="Verify_NumericPluginsTest.cs" />
+    <Compile Include="NumericPluginsTestBase.cs" />
+    <Compile Include="Verify_CommonPluginsTest.cs" />
     <Compile Include="VerifyTest.cs" />
     <Compile Include="LengthPluginsTest.cs" />
     <Compile Include="NumericPluginsTest.cs" />

@@ -39,7 +39,12 @@ More Methods
   * Positive()/NotNegative()
   * Negative()/NotPositive()
 
-Methods can be called in chains. You can also extend VerifyArgs with your own checks -- see "Extensibility" section below.
+Methods can be called in chains. Some checks can be invoked using minified API, for example:
+
+    Verify.NotNullOrEmpty(new { first, second });
+    Verify.Positive(new { secondCount });
+
+You can also extend VerifyArgs with your own checks -- see "Extensibility" section below.
 
 Purpose
 -------
