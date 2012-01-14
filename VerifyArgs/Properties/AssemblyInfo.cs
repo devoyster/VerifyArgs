@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 [assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]
 
 [assembly: AssemblyTitle("VerifyArgs")]
 [assembly: AssemblyDescription("Contains Verify - fast and extensible class for simple method arguments asserts. Example: Verify.Args(new { param1, param2 }).NotNull()")]

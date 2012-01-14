@@ -1,4 +1,7 @@
 ﻿using System.Reflection;
+using System.Runtime.InteropServices;
+
+[assembly: ComVisible(false)]
 
 [assembly: AssemblyTitle("VerifyArgs.Test")]
 [assembly: AssemblyDescription("VerifyArgs unit tests")]
