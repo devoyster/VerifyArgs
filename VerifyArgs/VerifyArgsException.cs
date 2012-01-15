@@ -6,7 +6,9 @@ namespace VerifyArgs
 	/// <summary>
 	/// Thrown when object supplied into <see cref="Verify.Args{T}" /> call is not of anonymous type.
 	/// </summary>
+#if NETFW
 	[Serializable]
+#endif
 	public class VerifyArgsException : Exception
 	{
 		/// <summary>
@@ -17,6 +19,7 @@ namespace VerifyArgs
 		{
 		}
 
+#if NETFW
 		/// <summary>
 		/// Creates new <see cref="VerifyArgsException" /> instance from serialization stream.
 		/// </summary>
@@ -25,5 +28,6 @@ namespace VerifyArgs
 		protected VerifyArgsException(SerializationInfo info, StreamingContext context) : base(info, context)
 		{
 		}
+#endif
 	}
 }

@@ -11,6 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F8ADF7
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{FCFD9E79-848C-41FF-AA61-B31AE6FC7BE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyArgs.Silverlight", "VerifyArgs.Silverlight\VerifyArgs.Silverlight.csproj", "{EEA16421-91FF-4847-90EF-D53EC3E7494D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyArgs.Silverlight.Test", "VerifyArgs.Silverlight.Test\VerifyArgs.Silverlight.Test.csproj", "{C178DE5C-1D41-4EE0-8AB4-0B54F18C5261}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +31,20 @@ Global
 		{B69ADA6B-47D4-4129-ACC5-B616AE21966C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B69ADA6B-47D4-4129-ACC5-B616AE21966C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B69ADA6B-47D4-4129-ACC5-B616AE21966C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEA16421-91FF-4847-90EF-D53EC3E7494D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA16421-91FF-4847-90EF-D53EC3E7494D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA16421-91FF-4847-90EF-D53EC3E7494D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA16421-91FF-4847-90EF-D53EC3E7494D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C178DE5C-1D41-4EE0-8AB4-0B54F18C5261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C178DE5C-1D41-4EE0-8AB4-0B54F18C5261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C178DE5C-1D41-4EE0-8AB4-0B54F18C5261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C178DE5C-1D41-4EE0-8AB4-0B54F18C5261}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEA16421-91FF-4847-90EF-D53EC3E7494D} = {FCFD9E79-848C-41FF-AA61-B31AE6FC7BE4}
+		{C178DE5C-1D41-4EE0-8AB4-0B54F18C5261} = {FCFD9E79-848C-41FF-AA61-B31AE6FC7BE4}
 	EndGlobalSection
 EndGlobal

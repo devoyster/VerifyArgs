@@ -87,7 +87,7 @@ namespace VerifyArgs.Test.Codegen
 		{
 			Executing.This(() => CreatePlugin.Test(Verify.Args(new { IsValid = false })))
 				.Should().Throw<ArgumentException>()
-				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False") && ex.ParamName == "IsValid");
+				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False") && ParamNameIsValid(ex));
 
 			var anon = new { IsValid = true };
 			CreatePlugin.Test(Verify.Args(anon));
@@ -103,7 +103,7 @@ namespace VerifyArgs.Test.Codegen
 		{
 			Executing.This(() => Create_CheckExprFunPlugin.Test(Verify.Args(new { IsValid = false })))
 				.Should().Throw<ArgumentException>()
-				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False") && ex.ParamName == "IsValid");
+				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False") && ParamNameIsValid(ex));
 			Create_CheckExprFunPlugin.Test(Verify.Args(new { IsValid = true }));
 		}
 
@@ -112,12 +112,12 @@ namespace VerifyArgs.Test.Codegen
 		{
 			Executing.This(() => Create_ParamPlugin.Test(Verify.Args(new { IsValid = false }), 0))
 				.Should().Throw<ArgumentException>()
-				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False0") && ex.ParamName == "IsValid");
+				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False0") && ParamNameIsValid(ex));
 			Create_ParamPlugin.Test(Verify.Args(new { IsValid = true }), 0);
 
 			Executing.This(() => Create_ParamPlugin.Test(Verify.Args(new { IsValid = true }), 42))
 				.Should().Throw<ArgumentException>()
-				.And.Exception.Satisfy(ex => ex.Message.StartsWith("True42") && ex.ParamName == "IsValid");
+				.And.Exception.Satisfy(ex => ex.Message.StartsWith("True42") && ParamNameIsValid(ex));
 			Create_ParamPlugin.Test(Verify.Args(new { IsValid = false }), 42);
 		}
 
@@ -126,13 +126,22 @@ namespace VerifyArgs.Test.Codegen
 		{
 			Executing.This(() => Create_Param_CheckExprFunPlugin.Test(Verify.Args(new { IsValid = false }), 0))
 				.Should().Throw<ArgumentException>()
-				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False0") && ex.ParamName == "IsValid");
+				.And.Exception.Satisfy(ex => ex.Message.StartsWith("False0") && ParamNameIsValid(ex));
 			Create_Param_CheckExprFunPlugin.Test(Verify.Args(new { IsValid = true }), 0);
 
 			Executing.This(() => Create_Param_CheckExprFunPlugin.Test(Verify.Args(new { IsValid = true }), 42))
 				.Should().Throw<ArgumentException>()
-				.And.Exception.Satisfy(ex => ex.Message.StartsWith("True42") && ex.ParamName == "IsValid");
+				.And.Exception.Satisfy(ex => ex.Message.StartsWith("True42") && ParamNameIsValid(ex));
 			Create_Param_CheckExprFunPlugin.Test(Verify.Args(new { IsValid = false }), 42);
+		}
+
+		private static bool ParamNameIsValid(ArgumentException ex)
+		{
+#if NETFW
+			return ex.ParamName == "IsValid";
+#else
+			return true;
+#endif
 		}
 	}
 }

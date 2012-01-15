@@ -47,6 +47,8 @@
     <Compile Include="Codegen\TypeUtilTest.cs" />
     <Compile Include="Codegen\VerifierFactoryTest.cs" />
     <Compile Include="CommonPluginsTestBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.Common.cs" />
+    <Compile Include="TestUtil.cs" />
     <Compile Include="Verify_NumericPluginsTest.cs" />
     <Compile Include="NumericPluginsTestBase.cs" />
     <Compile Include="Verify_CommonPluginsTest.cs" />

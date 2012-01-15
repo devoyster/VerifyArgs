@@ -165,7 +165,7 @@ namespace VerifyArgs.Codegen
 						(pi, i) =>
 						{
 							var valueVar = Expr.Field(objectVar, fields[i]);
-							return Expr.IfThen(
+							return (Expr)Expr.IfThen(
 								checkExprFunc(valueVar, additionalParams),
 								Expr.Throw(
 									exceptionBody
@@ -178,7 +178,7 @@ namespace VerifyArgs.Codegen
 				var checksBody = propertyChecks.Any()
 					? Expr.IfThen(
 						Expr.ReferenceNotEqual(objectVar, Expr.Constant(null, type)),
-						propertyChecks.Count > 1 ? (Expr)Expr.Block(propertyChecks) : propertyChecks[0])
+						propertyChecks.Count > 1 ? Expr.Block(propertyChecks) : propertyChecks[0])
 					: null;
 
 				lambdaBody = propertyChecks.Any()

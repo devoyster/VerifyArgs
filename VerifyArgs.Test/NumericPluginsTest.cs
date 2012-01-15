@@ -12,13 +12,13 @@ namespace VerifyArgs.Test
 		{
 			MinValueAction(new { test = 0 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MinValueAction(new { test = 0, test2 = 0.0 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MinValueAction(new { test = 2, test2 = 0.5 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			MinValueAction(new { test = 1 }, 1)();
 			MinValueAction(new { test = 1, test2 = 2.0 }, 1)();
@@ -29,13 +29,13 @@ namespace VerifyArgs.Test
 		{
 			MaxValueAction(new { test = 2 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MaxValueAction(new { test = 2, test2 = 2.0 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MaxValueAction(new { test = 0, test2 = 1.5 }, 1)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			MaxValueAction(new { test = 1 }, 1)();
 			MaxValueAction(new { test = 1, test2 = 0.0 }, 1)();
@@ -46,22 +46,22 @@ namespace VerifyArgs.Test
 		{
 			InRangeAction(new { test = 2 }, 4, 3)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			InRangeAction(new { test = 2 }, 3, 3)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			InRangeAction(new { test = 1 }, 2, 4)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			InRangeAction(new { test = 5 }, 2, 4)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			InRangeAction(new { test = 1, test2 = 1.0 }, 2, 4)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			InRangeAction(new { test = 3, test2 = 4.5 }, 2, 4)
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			InRangeAction(new { test = 3 }, 3, 3)();
 			InRangeAction(new { test = 2 }, 2, 4)();

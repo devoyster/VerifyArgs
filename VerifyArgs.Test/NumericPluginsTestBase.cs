@@ -11,16 +11,16 @@ namespace VerifyArgs.Test
 		{
 			PositiveAction(new { test = -1 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			PositiveAction(new { test = 0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			PositiveAction(new { test = -1, test2 = -1.0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			PositiveAction(new { test = 1, test2 = 0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			PositiveAction(new { test = 1 })();
 			PositiveAction(new { test = 1, test2 = 2.0 })();
@@ -31,13 +31,13 @@ namespace VerifyArgs.Test
 		{
 			NotNegativeAction(new { test = -1 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNegativeAction(new { test = -1, test2 = -1.0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNegativeAction(new { test = 1, test2 = -0.5 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			NotNegativeAction(new { test = 0 })();
 			NotNegativeAction(new { test = 0, test2 = 1.0 })();
@@ -48,16 +48,16 @@ namespace VerifyArgs.Test
 		{
 			NegativeAction(new { test = 1 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NegativeAction(new { test = 0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NegativeAction(new { test = 1, test2 = 1.0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NegativeAction(new { test = -1, test2 = 0.0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			NegativeAction(new { test = -1 })();
 			NegativeAction(new { test = -1, test2 = -2.0 })();
@@ -68,13 +68,13 @@ namespace VerifyArgs.Test
 		{
 			NotPositiveAction(new { test = 1 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotPositiveAction(new { test = 1, test2 = 1.0 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotPositiveAction(new { test = 0, test2 = 0.5 })
 				.Should().Throw<ArgumentOutOfRangeException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			NotPositiveAction(new { test = 0 })();
 			NotPositiveAction(new { test = 0, test2 = -1.0 })();

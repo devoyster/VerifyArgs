@@ -1,7 +1,7 @@
 VerifyArgs
 ==========
 
-VerifyArgs is a lightweight, fast and extensible library for method arguments value checks. It's written in C# 4.0 and can be used from .NET 4.0 code. VerifyArgs contains Verify class which can be used to validate arguments of your method:
+VerifyArgs is a lightweight, fast and extensible library for method arguments value checks. It's written in C# 4.0 and can be used in .NET FW 4+ and Silverlight 4+ applications. VerifyArgs contains Verify class which can be used to validate arguments of your method:
 
     public string MyConcat(string first, string second, int secondCount)
     {

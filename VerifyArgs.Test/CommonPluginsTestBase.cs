@@ -11,13 +11,13 @@ namespace VerifyArgs.Test
 		{
 			NotNullAction(new { test = (string)null })
 				.Should().Throw<ArgumentNullException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNullAction(new { test = (string)null, test2 = (object)null })
 				.Should().Throw<ArgumentNullException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNullAction(new { test = "123", test2 = (object)null })
 				.Should().Throw<ArgumentNullException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 			
 			NotNullAction(new { test = "123" })();
 			NotNullAction(new { test = "123", test2 = 1 })();
@@ -28,13 +28,13 @@ namespace VerifyArgs.Test
 		{
 			NotEmptyAction(new { test = "" })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotEmptyAction(new { test = "", test2 = new int[0] })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotEmptyAction(new { test = "123", test2 = new int[0] })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			NotEmptyAction(new { test = "123" })();
 			NotEmptyAction(new { test = "123", test2 = 1 })();
@@ -45,13 +45,13 @@ namespace VerifyArgs.Test
 		{
 			NotDefaultAction(new { test = 0 })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotDefaultAction(new { test = Guid.Empty, test2 = DateTime.MinValue })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotDefaultAction(new { test = 1, test2 = DateTime.MinValue })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			NotDefaultAction(new { test = 1, test2 = (string)null })();
 			NotDefaultAction(new { test = 1, test2 = "0", test3 = Guid.NewGuid() })();
@@ -62,22 +62,22 @@ namespace VerifyArgs.Test
 		{
 			NotNullOrEmptyAction(new { test = (string)null })
 				.Should().Throw<ArgumentNullException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNullOrEmptyAction(new { test = (string)null, test2 = (object)null })
 				.Should().Throw<ArgumentNullException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNullOrEmptyAction(new { test = "123", test2 = (object)null })
 				.Should().Throw<ArgumentNullException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 			NotNullOrEmptyAction(new { test = "" })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNullOrEmptyAction(new { test = "", test2 = new int[0] })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			NotNullOrEmptyAction(new { test = "123", test2 = new int[0] })
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			NotNullOrEmptyAction(new { test = "123" })();
 			NotNullOrEmptyAction(new { test = "123", test2 = 1 })();

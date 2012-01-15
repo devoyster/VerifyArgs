@@ -12,13 +12,13 @@ namespace VerifyArgs.Test
 		{
 			MinLengthAction(new { test = "" }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MinLengthAction(new { test = "", test2 = new int[0] }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MinLengthAction(new { test = "ab", test2 = new int[0] }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			MinLengthAction(new { test = (string)null }, 1)();
 			MinLengthAction(new { test = "a" }, 1)();
@@ -30,13 +30,13 @@ namespace VerifyArgs.Test
 		{
 			MaxLengthAction(new { test = "ab" }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MaxLengthAction(new { test = "ab", test2 = new int[2] }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			MaxLengthAction(new { test = "", test2 = new int[2] }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			MaxLengthAction(new { test = (string)null }, 1)();
 			MaxLengthAction(new { test = "a" }, 1)();
@@ -48,13 +48,13 @@ namespace VerifyArgs.Test
 		{
 			LengthEqualAction(new { test = "ab" }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			LengthEqualAction(new { test = "", test2 = new int[2] }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			LengthEqualAction(new { test = "a", test2 = new int[2] }, 1)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			LengthEqualAction(new { test = (string)null }, 1)();
 			LengthEqualAction(new { test = "a" }, 1)();
@@ -66,22 +66,22 @@ namespace VerifyArgs.Test
 		{
 			LengthInRangeAction(new { test = "ab" }, 4, 3)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			LengthInRangeAction(new { test = "ab" }, 3, 3)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			LengthInRangeAction(new { test = "a" }, 2, 4)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			LengthInRangeAction(new { test = "abcde" }, 2, 4)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			LengthInRangeAction(new { test = "a", test2 = new int[1] }, 2, 4)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test");
+				.And.Exception.ParamNameShouldBe("test");
 			LengthInRangeAction(new { test = "abc", test2 = new int[5] }, 2, 4)
 				.Should().Throw<ArgumentException>()
-				.And.Exception.ParamName.Should().Be("test2");
+				.And.Exception.ParamNameShouldBe("test2");
 
 			LengthInRangeAction(new { test = (string)null }, 2, 4)();
 			LengthInRangeAction(new { test = "abc" }, 3, 3)();

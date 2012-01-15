@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C178DE5C-1D41-4EE0-8AB4-0B54F18C5261}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VerifyArgs.Test</RootNamespace>
+    <AssemblyName>VerifyArgs.Silverlight.Test</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\VerifyArgs\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="NUnit.Silverlight.Framework">
+      <HintPath>..\libs\nunit-silverlight\bin\NUnit.Silverlight.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpTestsEx">
+      <HintPath>..\packages\SharpTestsEx.Silverlight.1.1.1\lib\sl4\SharpTestsEx.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\VerifyArgs.Test\ArgumentsTest.cs">
+      <Link>ArgumentsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\Codegen\TypeUtilTest.cs">
+      <Link>Codegen\TypeUtilTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\Codegen\VerifierFactoryTest.cs">
+      <Link>Codegen\VerifierFactoryTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\CommonPluginsTest.cs">
+      <Link>CommonPluginsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\CommonPluginsTestBase.cs">
+      <Link>CommonPluginsTestBase.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\LengthPluginsTest.cs">
+      <Link>LengthPluginsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\NumericPluginsTest.cs">
+      <Link>NumericPluginsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\NumericPluginsTestBase.cs">
+      <Link>NumericPluginsTestBase.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\Properties\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\TestUtil.cs">
+      <Link>TestUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\VerifyTest.cs">
+      <Link>VerifyTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\Verify_CommonPluginsTest.cs">
+      <Link>Verify_CommonPluginsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\VerifyArgs.Test\Verify_NumericPluginsTest.cs">
+      <Link>Verify_NumericPluginsTest.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VerifyArgs.Silverlight\VerifyArgs.Silverlight.csproj">
+      <Project>{EEA16421-91FF-4847-90EF-D53EC3E7494D}</Project>
+      <Name>VerifyArgs.Silverlight</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

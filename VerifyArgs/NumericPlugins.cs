@@ -220,8 +220,14 @@ namespace VerifyArgs
 		{
 			return VerifierFactory.Create<T, decimal>(
 				TypeUtil.IsNumeric,
-				(valueVar, _) => compareWithZeroExprFunc(valueVar, Expr.Constant(Convert.ChangeType(0, valueVar.Type))),
-				(n, x) => new ArgumentOutOfRangeException(n, x, errorMessage));
+				(valueVar, _) => compareWithZeroExprFunc(valueVar, Expr.Constant(Convert.ChangeType(0, valueVar.Type, null))),
+				(n, x) =>
+#if NETFW
+					new ArgumentOutOfRangeException(n, x, errorMessage)
+#else
+					new ArgumentOutOfRangeException(n, errorMessage)
+#endif
+				);
 		}
 
 		public static Func<Arguments<T>, decimal, Arguments<T>> Create<T>(Expression<Func<decimal, decimal, bool>> checkExpr, string errorMessage) where T : class
@@ -229,7 +235,13 @@ namespace VerifyArgs
 			return VerifierFactory.Create<T, decimal, decimal>(
 				TypeUtil.IsNumeric,
 				checkExpr,
-				(n, x, param) => new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, param)));
+				(n, x, param) =>
+#if NETFW
+					new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, param))
+#else
+					new ArgumentOutOfRangeException(n, string.Format(errorMessage, param))
+#endif
+				);
 		}
 
 		public static Func<Arguments<T>, decimal, decimal, Arguments<T>> Create<T>(Expression<Func<decimal, decimal, decimal, bool>> checkExpr, string errorMessage) where T : class
@@ -237,7 +249,13 @@ namespace VerifyArgs
 			return VerifierFactory.Create<T, decimal, decimal, decimal>(
 				TypeUtil.IsNumeric,
 				checkExpr,
-				(n, x, p1, p2) => new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, p1, p2)));
+				(n, x, p1, p2) =>
+#if NETFW
+					new ArgumentOutOfRangeException(n, x, string.Format(errorMessage, p1, p2))
+#else
+					new ArgumentOutOfRangeException(n, string.Format(errorMessage, p1, p2))
+#endif
+				);
 		}
 	}
 }

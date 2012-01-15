@@ -1,20 +1,17 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>VerifyArgs</id>
+    <version>1.0.2.0</version>
+    <title>VerifyArgs</title>
+    <authors>Andriy Kozachuk</authors>
+    <owners>Andriy Kozachuk</owners>
     <licenseUrl>http://verifyargs.codeplex.com/license</licenseUrl>
     <projectUrl>http://verifyargs.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>Minified API (breaking change).</releaseNotes>
+    <description>Contains Verify - fast and extensible class for simple method arguments asserts. Example: Verify.Args(new { param1, param2 }).NotNull()</description>
+    <releaseNotes>Silverlight 4+ support added.</releaseNotes>
     <copyright>Copyright (c) 2011-2012, Andriy Kozachuk</copyright>
     <tags>method parameters arguments assert check verify NotNull code contracts</tags>
   </metadata>
-  <files>
-    <file src="..\license.txt" target="lib\net40\VerifyArgs.license.txt" />
-  </files>
 </package>
