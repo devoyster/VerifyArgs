@@ -87,7 +87,7 @@ To work fast VerifyArgs uses runtime code generation (using Expression Trees) --
     UsualHelper: 28ns
     VerifyArgs: 56ns
 
-As you can see, VerifyArgs is about 15x slower than native arguments check approach so you need to think before using it in performance-critical methods (I guess you won't check arguments in them anyway). However, it's performance is comparable with usual static helpers; also 56 nanoseconds is not too much, you know. Test code can be [downloaded from GitHub](https://github.com/devoyster/Oyster.Examples/tree/master/Oyster.Examples.VerifyArgs).
+As you can see, VerifyArgs is about 15x slower than native arguments check approach so you need to think before using it in performance-critical methods (I guess you won't check arguments in them anyway). However, its performance is comparable with usual static helpers; also 56 nanoseconds is not too much, you know. Test code can be [downloaded from GitHub](https://github.com/devoyster/Oyster.Examples/tree/master/Oyster.Examples.VerifyArgs).
 
 Extensibility
 -------------
@@ -101,7 +101,7 @@ You can add your own VerifyArgs extension methods which will perform your checks
             public static readonly Func<Arguments<T>, Arguments<T>> Verifier =
                 VerifierFactory.Create<T, string>(
                     t => t == typeof(string),
-                    str => str == null || str.Trim().Length == 0,
+                    str => string.IsNullOrWhiteSpace(str),
                     (n, _) => new ArgumentException("Value should have data.", n));
         }
 
