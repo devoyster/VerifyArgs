@@ -3,12 +3,14 @@ VerifyArgs
 
 VerifyArgs is a lightweight, fast and extensible library for method arguments value checks. It's written in C# 4.0 and can be used in .NET FW 4+ and Silverlight 4+ applications. VerifyArgs contains Verify class which can be used to validate arguments of your method:
 
-    public string MyConcat(string first, string second, int secondCount)
-    {
-        Verify.Args(new { first, second }).NotNull().NotEmpty();
-        Verify.Args(new { secondCount }).Positive();
-        // your code
-    }
+```c#
+public string MyConcat(string first, string second, int secondCount)
+{
+	Verify.Args(new { first, second }).NotNull().NotEmpty();
+	Verify.Args(new { secondCount }).Positive();
+	// your code
+}
+```
 
 This code ensures that "first" and "second" arguments are not null/empty and "secondCount" is greater than zero. In case if validation is failed for some of the arguments Verify will throw an exception which will contain name of the parameter which failed validation; for example, if "first" is null then Verify will throw `new ArgumentNullException("first")`. And you don't need to provide parameter name explicitly!
 
@@ -41,8 +43,10 @@ More Methods
 
 Methods can be called in chains. Some checks can be invoked using minified API, for example:
 
-    Verify.NotNullOrEmpty(new { first, second });
-    Verify.Positive(new { secondCount });
+```c#
+Verify.NotNullOrEmpty(new { first, second });
+Verify.Positive(new { secondCount });
+```
 
 You can also extend VerifyArgs with your own checks -- see "Extensibility" section below.
 
@@ -51,19 +55,21 @@ Purpose
 
 While working on different C# projects I often saw custom helpers for method argument checks which were looking like this:
 
-    public static class CheckArgument
-    {
-        public static void NotNull(object param, string name)
-        {
-            if (param == null)
-            {
-                throw new ArgumentNullException(name);
-            }
-        }
-    }
+```c#
+public static class CheckArgument
+{
+	public static void NotNull(object param, string name)
+	{
+		if (param == null)
+		{
+			throw new ArgumentNullException(name);
+		}
+	}
+}
 
-    // Usage in code
-    CheckArgument.NotNull(first, "first");
+// Usage in code
+CheckArgument.NotNull(first, "first");
+```
 
 Well, such code has its disadvantages:
 
@@ -94,25 +100,27 @@ Extensibility
 
 You can add your own VerifyArgs extension methods which will perform your checks and use runtime code generation infrastructure i.e. will be fast. Let's imagine that you need `HasData()` method which will check that string is not null or empty or consists of whitespace chars only. You can add it using code provided below:
 
-    public static class HasDataPlugin
-    {
-        private static class Cache<T> where T : class
-        {
-            public static readonly Func<Arguments<T>, Arguments<T>> Verifier =
-                VerifierFactory.Create<T, string>(
-                    t => t == typeof(string),
-                    str => string.IsNullOrWhiteSpace(str),
-                    (n, _) => new ArgumentException("Value should have data.", n));
-        }
+```c#
+public static class HasDataPlugin
+{
+	private static class Cache<T> where T : class
+	{
+		public static readonly Func<Arguments<T>, Arguments<T>> Verifier =
+			VerifierFactory.Create<T, string>(
+				t => t == typeof(string),
+				str => string.IsNullOrWhiteSpace(str),
+				(n, _) => new ArgumentException("Value should have data.", n));
+	}
 
-        public static Arguments<T> HasData<T>(this Arguments<T> args) where T : class
-        {
-            return Cache<T>.Verifier(args);
-        }
-    }
+	public static Arguments<T> HasData<T>(this Arguments<T> args) where T : class
+	{
+		return Cache<T>.Verifier(args);
+	}
+}
 
-    // Usage in code
-    Verify.Args(new { inputString }).HasData();
+// Usage in code
+Verify.Args(new { inputString }).HasData();
+```
 
 There are several things worth mentioning about this code:
 
